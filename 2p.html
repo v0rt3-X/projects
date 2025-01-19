@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v0rt3X</title>
+    <link rel="shortcut icon" href="assets/logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome link for the gear icon -->
+    <style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    color: white;
+}
+
+.logo-container {
+  display: flex; /* Flexbox for horizontal alignment */
+  align-items: center; /* Align vertically centered */
+  margin-left: 50px; /* Move Skibidi 50px from the edge */
+}
+
+/* Logo image styling */
+.logo-img {
+  width: 30px; /* Increase the width of the logo */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Space between logo and text */
+}
+
+#logo-text {
+  margin: 0; /* Remove default margin from the h1 */
+  font-size: 2rem; /* Ensure the text is large and centered */
+  color: white;
+  text-align: left;
+}
+/* Navigation container (for the Two Players and Games text) */
+.nav-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the navigation links */
+.nav-container a {
+    margin-right: 50px; /* Move the text 50px from the edge */
+    font-size: 1.2rem;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-container a:hover {
+    color: purple; /* Change color on hover */
+}
+
+/* Gear button styling */
+.gear-button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gear-button:hover {
+    background-color: #444;
+}
+
+/* Position the gear button at the bottom left */
+.gear-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000; /* Ensures the button stays on top */
+}
+
+#file-input {
+    display: none;
+}
+
+body {
+    transition: background 0.5s ease-in-out;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+}
+
+body {
+    background-image: url('assets/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #121212; 
+    color: #e0e0e0; 
+}
+
+header {
+    width: 100%;
+    background-color: rebeccapurple; 
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: none;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    text-align: center;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.grid-container {
+    display: grid;
+    grid-wrap: wrap;
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    width: 100%;
+    overflow: auto; 
+    justify-content: center; 
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent; 
+    padding: 10px;
+    border: 1px solid #333; 
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.grid-item:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 0 15px 2px rgba(255, 99, 255, 0.5); 
+}
+
+.image-slot {
+    width: 100px;
+    height: 100px;
+    background-color: transparent; 
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.3s ease; 
+}
+
+.image-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.3s ease; 
+}
+
+.image-slot:hover img {
+    transform: scale(1.1); 
+}
+
+.caption {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e0e0e0; 
+}
+
+.grid-container::-webkit-scrollbar {
+    display: none;
+}
+
+.grid-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+  </style>
+</head>
+<body>
+  <header>
+        <div class="logo-container">
+            <img href="index.html" src="assets/logo.png" alt="Logo" class="logo-img">
+            <h1 id="logo-text">v0rt3X</h1>  
+        </div>
+        <div class="nav-container">
+<a href="g.html">Games</a>
+            <a href="2p.html">Two Players</a>  
+<a href="a.html">Apps</a>
+            <a href="p.html">Proxy</a>
+        </div>
+    </header>
+  
+  <div class="search-container">
+    <input type="text" class="search-bar" id="searchBar" placeholder="Search for a game..." onkeyup="filterGames()">
+  </div>
+   <div class="gear-container">
+        <button id="gear-button" class="gear-button">
+            <i class="fas fa-cog"></i> <!-- FontAwesome gear icon -->
+        </button>
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
+    </div>
+
+    <script>
+        document.addEventListener('keydown', function(event) {
+            // Check if the pressed key is backslash
+            if (event.key === '\\') {
+                // Navigate to l.html
+                window.location.href = 'l.html';
+            }
+        });
+document.getElementById('logo-text').addEventListener('click', function () {
+localStorage.clear(); // Clear all items from localStorage
+location.reload(); // Reload the page to reset the background
+});
+// Function to change the background image and save it to localStorage
+document.getElementById('file-input').addEventListener('change', function (event) {
+  var file = event.target.files[0];
+  if (file) {
+    var reader = new FileReader();
+    
+    reader.onload = function (e) {
+      // Set the new background image
+      document.body.style.backgroundImage = 'url(' + e.target.result + ')';
+      // Store the background image in localStorage
+      localStorage.setItem('backgroundImage', e.target.result);
+    };
+    
+    reader.readAsDataURL(file);
+  }
+});
+
+// Check if a background image is stored in localStorage when the page loads
+window.addEventListener('load', function () {
+  const storedBackground = localStorage.getItem('backgroundImage');
+  if (storedBackground) {
+    document.body.style.backgroundImage = 'url(' + storedBackground + ')';
+  }
+});
+	document.getElementById('gear-button').addEventListener('click', function () {
+            document.getElementById('file-input').click();
+        });
+
+        document.getElementById('file-input').addEventListener('change', function (event) {
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    document.body.style.backgroundImage = 'url(' + e.target.result + ')';
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+  <div class="grid-container" id="gridContainer">
+    <!-- Dynamically generate a large number of items with different images and names -->
+    <script>
+      const gridContainer = document.querySelector('.grid-container');
+      const searchBar = document.getElementById('searchBar');
+      
+      const items = [
+{ name: '1v1.lol', imageUrl: 'https://img.utdstc.com/icon/983/22a/98322a3b2be892eed31589906ffd949b68bcccc9a21ba562987965b5ec6bc6de:200', page: 'g/page1.html' },
+{ name: 'American Touchdown', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt4ILZexomGwGpc34cG3GkEAh9ZFcWzqJkkA&s', page: 'g/page54.html' },
+{ name: 'basketball slam dunk', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1AYL53n5RSMhruqodKwU1ZZGwMHVxBLamaQ&s', page: 'g/page53.html' },
+{ name: 'Bad Ice Cream', imageUrl: 'https://i.ytimg.com/vi/NooyD9fVsv8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD3lpxHYD4UVX3IB3CGnlQmbaI-3w', page: 'g/page91.html' },
+{ name: 'Bad Ice Cream 2', imageUrl: 'https://cdn2.steamgriddb.com/logo/0fc8dee1ef46c0467df068405aa59715.png', page: 'g/page90.html' },
+{ name: 'Bad Ice Cream 3', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxpHrKZs0URwM9o_rObkXV-a48xxfON9tzbA&s', page: 'g/page76.html' },
+{ name: 'bad smash 2', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmIdcoMS1Ss4a0b7BweRC6hTTdFvlrOzzWMQ&s', page: 'g/page7.html' },
+{ name: 'Fire Boy & Water Girl', imageUrl: 'https://play-lh.googleusercontent.com/6N_ON50BZiEAe-ll2lM92NrVrgp5I5Ha6VI0a4Usw7uPmgEjL6tgJR6jWYUkkYgx2LM', page: 'g/page68.html' },
+{ name: 'getaway shootout', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMc_1MTMP6h6pP31PHSfpZg64m4sCXLVTwvA&s', page: 'g/page45.html' },
+{ name: 'gimme the airpod', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_qXpdhjVUGzi3SvakWq_8fovYuQ7PNoF_bg&s', page: 'g/page107.html' },
+{ name: 'house of hazards', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/0609b0ba2889859b21cf47ca205818fe.png', page: 'g/page56.html' },
+{ name: 'just fall.lol', imageUrl: 'https://play-lh.googleusercontent.com/-0rSllZ8as88Jcs3iZ7-JCFyTb3YLB-HjR7bY7P6q_2MAswmDH4h1qNPfFiaZqzkkg', page: 'g/page106.html' },
+{ name: 'krunker', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq0ZNEc_5ZwEC5vHuCI97Cu2m8Xi4OmhUmXA&s', page: 'g/page60.html' },
+{ name: 'smash karts', imageUrl: 'https://yt3.googleusercontent.com/f4e3X0TDQ6edrwk29w6pBgxLdTnNUvZdBkDGDO0zqlWXY6NGVjdDvlTKhyg4apwjykBu-hSGuw=s900-c-k-c0x00ffffff-no-rj', page: 'g/page58.html' },
+{ name: 'submarine', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI85_3EiLMIGOqBbeZzm3YQUeEpv5PyBh2PQ&s', page: 'g/page87.html' },
+{ name: 'Tube Jumpers', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/866c01d7-d1fe-48b0-bcbf-bf5656c036d8.png', page: 'g/page108.html' },
+{ name: 'minecraft', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8_oBcDya0fpJfEtcZQa63J9wCezCleN5O1w&s', page: 'g/page23.html' },
+{ name: 'minecraft 1.8', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK61XkVLPifsF2CNnK0IMfpiBXcLJJn5c6XQ&s', page: 'g/page24.html' }
+
+      ];
+
+      function filterGames() {
+        const searchTerm = searchBar.value.toLowerCase();
+        const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchTerm));
+        renderGrid(filteredItems);
+      }
+
+      function renderGrid(filteredItems) {
+        gridContainer.innerHTML = '';
+        filteredItems.forEach(item => {
+          const gridItem = document.createElement('div');
+          gridItem.className = 'grid-item';
+
+          const imageSlot = document.createElement('div');
+          imageSlot.className = 'image-slot';
+
+          const img = document.createElement('img');
+          img.src = item.imageUrl;  
+          img.alt = item.name;  
+          imageSlot.appendChild(img);
+
+          const caption = document.createElement('div');
+          caption.className = 'caption';
+          caption.textContent = item.name;
+
+          gridItem.appendChild(imageSlot);
+          gridItem.appendChild(caption);
+
+          gridItem.onclick = () => {
+            window.open(item.page, '_blank');
+          };
+
+          gridContainer.appendChild(gridItem);
+        });
+      }
+
+      renderGrid(items);  
+    </script>
+  </div>
+</body>
+</html>

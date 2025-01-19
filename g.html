@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v0rt3X</title>
+        <link rel="shortcut icon" href="assets/logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome link for the gear icon -->
+    <style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    color: white;
+}
+
+.logo-container {
+  display: flex; /* Flexbox for horizontal alignment */
+  align-items: center; /* Align vertically centered */
+  margin-left: 50px; /* Move Skibidi 50px from the edge */
+}
+
+/* Logo image styling */
+.logo-img {
+  width: 30px; /* Increase the width of the logo */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Space between logo and text */
+}
+
+#logo-text {
+  margin: 0; /* Remove default margin from the h1 */
+  font-size: 2rem; /* Ensure the text is large and centered */
+  color: white;
+  text-align: left;
+}
+/* Navigation container (for the Two Players and Games text) */
+.nav-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the navigation links */
+.nav-container a {
+    margin-right: 50px; /* Move the text 50px from the edge */
+    font-size: 1.2rem;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-container a:hover {
+    color: purple; /* Change color on hover */
+}
+
+/* Gear button styling */
+.gear-button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gear-button:hover {
+    background-color: #444;
+}
+
+/* Position the gear button at the bottom left */
+.gear-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000; /* Ensures the button stays on top */
+}
+
+#file-input {
+    display: none;
+}
+
+body {
+    transition: background 0.5s ease-in-out;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+}
+
+body {
+    background-image: url('assets/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #121212; 
+    color: #e0e0e0; 
+}
+
+header {
+    width: 100%;
+    background-color: rebeccapurple; 
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: none;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    text-align: center;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.grid-container {
+    display: grid;
+    grid-wrap: wrap;
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    width: 100%;
+    overflow: auto; 
+    justify-content: center; 
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent; 
+    padding: 10px;
+    border: 1px solid #333; 
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.grid-item:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 0 15px 2px rgba(255, 99, 255, 0.5); 
+}
+
+.image-slot {
+    width: 100px;
+    height: 100px;
+    background-color: transparent; 
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.3s ease; 
+}
+
+.image-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.3s ease; 
+}
+
+.image-slot:hover img {
+    transform: scale(1.1); 
+}
+
+.caption {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e0e0e0; 
+}
+
+.grid-container::-webkit-scrollbar {
+    display: none;
+}
+
+.grid-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+  </style>
+</head>
+<body>
+  <header>
+        <div class="logo-container">
+            <img href="index.html" src="assets/logo.png" alt="Logo" class="logo-img">
+            <h1 id="logo-text">v0rt3X</h1>  
+        </div>
+        <div class="nav-container">
+<a href="g.html">Games</a>
+            <a href="2p.html">Two Players</a>  
+<a href="a.html">Apps</a>
+            <a href="p.html">Proxy</a>
+        </div>
+    </header>
+  
+  <div class="search-container">
+    <input type="text" class="search-bar" id="searchBar" placeholder="Search for a game..." onkeyup="filterGames()">
+  </div>
+   <div class="gear-container">
+        <button id="gear-button" class="gear-button">
+            <i class="fas fa-cog"></i> <!-- FontAwesome gear icon -->
+        </button>
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
+    </div>
+
+    <script>
+        document.addEventListener('keydown', function(event) {
+            // Check if the pressed key is backslash
+            if (event.key === '\\') {
+                // Navigate to l.html
+                window.location.href = 'l.html';
+            }
+        });
+document.getElementById('logo-text').addEventListener('click', function () {
+localStorage.clear(); // Clear all items from localStorage
+location.reload(); // Reload the page to reset the background
+});
+// Function to change the background image and save it to localStorage
+document.getElementById('file-input').addEventListener('change', function (event) {
+  var file = event.target.files[0];
+  if (file) {
+    var reader = new FileReader();
+    
+    reader.onload = function (e) {
+      // Set the new background image
+      document.body.style.backgroundImage = 'url(' + e.target.result + ')';
+      // Store the background image in localStorage
+      localStorage.setItem('backgroundImage', e.target.result);
+    };
+    
+    reader.readAsDataURL(file);
+  }
+});
+
+// Check if a background image is stored in localStorage when the page loads
+window.addEventListener('load', function () {
+  const storedBackground = localStorage.getItem('backgroundImage');
+  if (storedBackground) {
+    document.body.style.backgroundImage = 'url(' + storedBackground + ')';
+  }
+});
+	document.getElementById('gear-button').addEventListener('click', function () {
+            document.getElementById('file-input').click();
+        });
+
+        document.getElementById('file-input').addEventListener('change', function (event) {
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    document.body.style.backgroundImage = 'url(' + e.target.result + ')';
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+  <div class="grid-container" id="gridContainer">
+    <!-- Dynamically generate a large number of items with different images and names -->
+    <script>
+      const gridContainer = document.querySelector('.grid-container');
+      const searchBar = document.getElementById('searchBar');
+      
+      const items = [
+          { name: 'SnowRider3D', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ64SYhh05_zaEtRRSc3h70DWiDXyBCsHS6rA&s', page: 'g/page3.html' },
+  { name: 'Adventure Capitalist', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHLEqTx0JVWICBFgQIhcHe2VZbKDBO0aFGPw&s', page: 'g/page142.html' },
+  { name: 'Avalanche', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPtl_GirhWJtrquAuIRXpEaMU_gYACFb6jXw&s', page: 'g/page93.html' },
+  { name: 'Amist the Sky', imageUrl: 'https://img.itch.zone/aW1nLzU3NjQxNTkucG5n/original/BJ51xh.png', page: 'g/page128.html' },
+  { name: 'an avg day at a cat cafe', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFnQ5xrdtEduAESiO8L9S69X4iJNp0iEVPXw&s', page: 'g/page4.html' },
+  { name: 'avoid the color', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN5HNq9RHzxVxHNX8skCD25aO9-YoSKzL5WA&s', page: 'g/page5.html' },
+  { name: 'avoid the void', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiHz8Wav-SbF7PvLslWYFGQ_AHyPFu-LAiJA&s', page: 'g/page6.html' },
+  { name: 'Agar.IO', imageUrl: 'https://static.wikia.nocookie.net/logopedia/images/0/0d/Agariom.png/revision/latest?cb=20220701110334', page: 'g/page21.html' },
+  { name: 'Baloons TD 2', imageUrl: 'https://static.wikia.nocookie.net/b__/images/a/ac/Btd2.png/revision/latest?cb=20200712005447&path-prefix=bloons', page: 'g/page89.html' },
+  { name: 'Baloons TD 5', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiV04u-XqL3iIwBpcEIwxRAEW5QU8Q9mjAAA&s', page: 'g/page144.html' },
+  { name: 'Baaldies Basics', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGOTVJ_YgJu0kz0EIrFCbWpNLn0ScfbkDF3A&s', page: 'g/page151.html' },
+  { name: 'Barito Bison', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaJzS7EXv9Ud9wrYlCn3POrl6QTGy1TfzK91ngvwYNodmSd0b-pE7BOmWSHJQJopz0W9y-', page: 'g/page138.html' },
+  { name: 'bitlife', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuaVg-nFFUMI4Ir5GABovV-zaqFWR5g_-yIw&s', page: 'g/page8.html' },
+  { name: 'bloxers', imageUrl: 'https://archive.org/serve/bloxors/Bloxorz.jpg', page: 'g/page121.html' },
+  { name: 'binding of isac', imageUrl: 'https://www.giantbomb.com/a/uploads/scale_small/8/87790/3140527-box_tboi.png', page: 'g/page124.html' },
+  { name: 'breaking the bank', imageUrl: 'https://flashmuseum.org/wp-content/uploads/2023/06/Breaking_the_Bank_logo.png', page: 'g/page122.html' },
+  { name: 'celeste classic', imageUrl: 'https://celeste.hsmusic.wiki/media/flash-art/celeste-classic.png', page: 'g/page9.html' },
+  { name: 'Circle O', imageUrl: 'https://play-lh.googleusercontent.com/402xpuDl6zg0PqhnmVTvJqvaLbQ4ewuk2-S8BQm1l68ddapXfWSy-ngcCByKBmC7ASY', page: 'g/page46.html' },
+  { name: 'Crazy Taxi', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRClGwyA0W1PQ7Zk3A0mkyGkM-WuMFeWMqCNw&s', page: 'g/page147.html' },
+  { name: 'Creative kill chamber', imageUrl: 'https://images.crazygames.com/games/creative-kill-chamber/cover-1627769236037.png?auto=format,compress&q=75&cs=strip', page: 'g/page123.html' },
+  { name: 'cookie clicker', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8LAMx-QZh1PcM8KQ9T45nc4y2kycq14WAfg&s', page: 'g/page10.html' },
+  { name: 'Crossy Road', imageUrl: 'https://cdn.jim-nielsen.com/ios/512/crossy-road-endless-arcade-2014-12-02.png', page: 'g/page71.html' },
+  { name: 'Cluster Rush', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6ymqQWzSTOW5SaekOF9ENU0pml4Fb5Oe-EA&s', page: 'g/page94.html' },
+  { name: 'doom', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQBhfmwnizW68_TAEx0-YwVPXN9IOMfn1J_w&s', page: 'g/page11.html' },
+  { name: 'doodle jump', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaXuaomBCNJ7htBKzs9d2F_sz6jBdZm5tT2g&s', page: 'g/page148.html' },
+  { name: 'dino game', imageUrl: 'https://miro.medium.com/v2/resize:fit:503/1*U2uYYkbC5YLwrM4wTEFReA.png', page: 'g/page146.html' },
+  { name: 'duck life', imageUrl: 'https://helixjump2.com/upload/imgs/duck-life.png', page: 'g/page139.html' },
+  { name: 'duck life 2', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGSsCPU0-cIGj0mNXmsfOsDpZdElwuzfTMkg&s', page: 'g/page140.html' },
+  { name: 'duck life 3', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=1200,height=1200,fit=cover,f=png/f5671816-e95b-4d41-adb7-411708f431ba.png', page: 'g/page102.html' },
+  { name: 'duck life 4', imageUrl: 'https://play-lh.googleusercontent.com/AUGkRrKMtUCLVE9vCvlfMY9Ny9EBqzx17yejVtEEhvpkw-H6lJlvBHgCMqPJm8HV_tM', page: 'g/page103.html' },
+  { name: 'duck life 5', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE64DKXe16YVt3S5ffb03GKJ_gi2Vfp8J_pd-72w9GoQvGSr5tWfyAOrXLmdFgtnrxFT8oqPnpMF4xNcZtsyBIz5tg16qh249RkSGCQQ', page: 'g/page134.html' },
+  { name: 'duck life 6', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS9Udys744fgSyjx8at51uBnqyfpFq5IvoGQ&s', page: 'g/page133.html' },
+  { name: 'drive mad', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrHknfWOZaUARblPdNIBjob4Ks8dLe2Tw87g&s', page: 'g/page95.html' },
+  { name: 'Dreader', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVhG1jg4JdhOwMC8Gojqa7liqVWrmqNUELPQIQl6Ud1sfVd6R7E3zvlct09_brX9QnGLk&usqp=CAU', page: 'g/page143.html' },
+  { name: 'dreadhead parkour', imageUrl: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRFgfFoYWLquLQXtmZpPQ5NJdvb_9zeklegDA0aIvtQTDA1xohRF3nJNyPJE_TjWbuzvNAyko22QhlzW7qP0I8FNj28Ko6c7Hu77wOd5dA', page: 'g/page125.html' },
+  { name: 'earn to die', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeMdnNhtoplLB2D7PBcAkfBAQvEeqBJYyjFw&s', page: 'g/page12.html' },
+  { name: 'edge surf', imageUrl: 'https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co53mz.jpg', page: 'g/page99.html' },
+  { name: 'eel slap', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhLBkW9qkBN0qTXXxwQyuYtalVQJ254DsDrA&s', page: 'g/page97.html' },
+  { name: 'evolution', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9ejGdDw0qwa1AlYs6Zd5DIrLlaqLojpnrDg&s', page: 'g/page115.html' },
+  { name: 'emulator', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFWgkqpmlXWOBVncZF3qoxQBa6bNXbZKqBRQ&s', page: 'g/page13.html' },
+  { name: 'escaping the prison', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/b0940b784e8eb55a3e40327e1afb42d5256045bf6601515f02c6fe45ab49e56c.png', page: 'g/page137.html' },
+  { name: 'flocc', imageUrl: 'https://play-lh.googleusercontent.com/eqBYJeBZQjtAOsevKUEe5VvdF6bW_Qw_WIqkJcEs1bm8aqdXgL2Dc6WJKja_Y0xqsPA', page: 'g/page14.html' },
+  { name: 'fleeing the complex', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/4e0cead7fe859cc9ce2a80ea46dd16c8c9be25f574ed2d0b82f27cb911d81b36.png', page: 'g/page136.html' },
+  { name: 'frying nemo', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMEi5-YFaeL3La-wB84aimlieTbH-UqscSDQ&s', page: 'g/page127.html' },
+  { name: 'fnaf1', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5Hr71riDlA_hm8XCzaiwwCFcug4Amqr7vQA&s', page: 'g/page15.html' },
+{ name: 'fnaf4', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl4VFeCemc2D--ZeEaVX4bLiDMI371xqAsrg&s', page: 'g/page16.html' },
+  { name: 'final earth', imageUrl: 'https://f4.bcbits.com/img/a3977539119_10.jpg', page: 'g/page88.html' },
+  { name: 'Game in a Game', imageUrl: 'https://img.itch.zone/aW1nLzQ1OTUwODcucG5n/original/Xdhfjt.png', page: 'g/page116.html' },
+  { name: 'generic fishing game', imageUrl: 'https://img.itch.zone/aW1nLzEwNDA2MDYwLnBuZw==/original/pucgOg.png', page: 'g/page47.html' },
+  { name: 'gold digger', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/ada621ee3a066ab12be8484017fd6297.png', page: 'g/page17.html' },
+  { name: 'grey box testing', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHETwZvYPgO-wKatzTexaW6qrM-QsM6qqyuw&s', page: 'g/page98.html' },
+  { name: 'Gravity Soccer', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnxrEQU6t8gI_2cLFVAbunMKX7a5MAziJSxWiuv-jA568qNxcay2NMPsVOmo6uMOwPq5s&usqp=CAU', page: 'g/page117.html' },
+  { name: 'help no brake', imageUrl: 'https://external-preview.redd.it/9oUkZR2h9_2pPl_YyuOPdlIxYgQkfsDLCmCoFadAG9k.jpg?auto=webp&s=53b4fd6c6213b0248c328bcea2c4b6a3820a41e3', page: 'g/page18.html' },
+  { name: 'Hungry Lamu', imageUrl: 'https://static.wikia.nocookie.net/inconsistently-heinous/images/e/e0/LamuCartoon.webp/revision/latest/scale-to-width/360?cb=20230108113459', page: 'g/page105.html' },
+  { name: 'Hotline City', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH8oX9lDLiHrlnStAqPw4__dm1qWHn0RU_Kg&s', page: 'g/page141.html' },
+  { name: 'Idle Breakout', imageUrl: 'https://play-lh.googleusercontent.com/e5jzYTn7Mjh9Ghn-DFpVedkOlRfSOyCS2AFgXdTrADIuuUbjx6vP6r_YOM2j5m7uLQ', page: 'g/page104.html' },
+  { name: 'Infinite Craft', imageUrl: 'https://play-lh.googleusercontent.com/YJFHGSmrMGuUqyWZ0oZDgDtDErIU2jQY3yT_PG9IRL6s5dBLmKXrXQShM3n8HFoPhkM=w240-h480-rw', page: 'g/page100.html' },
+  { name: 'Interactive Buddy', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe17Uld_rSH5UcwLmZ7VOjMbdQrSbDo8PRZg&s', page: 'g/page129.html' },
+  { name: 'Infiltrating the Airship', imageUrl: 'https://images.sftcdn.net/images/t_app-icon-m/p/a64b46a4-6353-11e8-92bc-0242ac120005/1846328002/infiltrating-the-airship-logo', page: 'g/page135.html' },
+  { name: 'Iron Snout', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGX3Kc85UaaHp_9FmEdZDZRPBSdd2Dmyp4Qw&s', page: 'g/page126.html' },
+  { name: 'jump king', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9M-22TSVoee40boMH_DKJmg3ny1z_-iQkfA&s', page: 'g/page20.html' },
+  { name: 'just one boss', imageUrl: 'https://i1.sndcdn.com/artworks-000471467685-eg5vxn-t1080x1080.jpg', page: 'g/page120.html' },
+  { name: 'Little Alchamy', imageUrl: 'https://play-lh.googleusercontent.com/-NQ2QLAOaafy7iHAJcrdEFk-tyVicnbwy6iLehml8K0Higi60sSVn0829bcyi1lOUw', page: 'g/page69.html' },
+  { name: 'Line Rider', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTkq4Nwv90Ziqn5QFOawP7BTmSqp71pLwKDw&s', page: 'g/page150.html' },
+  { name: 'Learn to Fly', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-g9PcIfOkbMDsNxz1w4OVqnwRH7LkaSptjg&s', page: 'g/page118.html' },
+  { name: 'Learn to Fly 2', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAqV7xfvzXrG7ydmSUVJBE-U__Qp25sR2_9w&s', page: 'g/page119.html' },
+  { name: 'mario 64', imageUrl: 'https://static.wikia.nocookie.net/big-chungus-hole/images/c/ca/Mario_64_box_art.jpg/revision/latest?cb=20201103020904', page: 'g/page114.html' },
+  { name: 'mikutap', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlW5HduT9DBfl1wGYAoAtw9xWOCQGTmZGIwQ&s', page: 'g/page22.html' },
+  { name: 'mob inc', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAGQ9AdJXCMAe2I2J-w2cs48UrXFVNKGqqWQ&s', page: 'g/page25.html' },
+  { name: 'motox3m', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuWiwEaTFMgkPRK8JB6lmDoX-1kRXMkHWhMQ&s', page: 'g/page79.html' },
+  { name: 'motox3m 2', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSczo5kigH3Lh2HOtqtQq31CY6_TD9dcgf7CA&s', page: 'g/page80.html' },
+  { name: 'motox3m pool', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/0235b530eec4f17ad60137f6b245a988.jpeg', page: 'g/page26.html' },
+  { name: 'motox3m spooky', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/3f8a297822df891a1c158576b6461014.png', page: 'g/page81.html' },
+  { name: 'motox3m winter', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/c28eee5a5924e8a70afb2c1490d9b571.jpeg', page: 'g/page82.html' },
+  { name: 'my house', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdNRbA-SH5qsaonyXORjsUnH1_hQ6AoMbAmQ&s', page: 'g/page27.html' },
+{ name: 'missiles', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjA9MmssfE3TfmpUc2D30C02XxdjC2SZxVKG5WZmL9mq-kAEpgDinF-SkiinLaiZ8kgq4&usqp=CAU', page: 'g/page78.html' },
+{ name: 'N-GON', imageUrl: 'https://img.itch.zone/aW1nLzI2OTY3MDAucG5n/original/kb8XuC.png', page: 'g/page48.html' },
+{ name: 'offline paradise', imageUrl: 'https://store-images.s-microsoft.com/image/apps.53426.13900150574023001.4f91d583-75ac-4b12-97dc-604df3e808b2.d88b10c9-2bf5-45bc-8f4f-58116b9845ba?mode=scale&q=90&h=200&w=200&background=%23464646', page: 'g/page86.html' },
+{ name: 'panndemic 2', imageUrl: 'https://i.scdn.co/image/ab67616d0000b27355afc1efce513e38ed486711', page: 'g/page85.html' },
+{ name: 'portal', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA0IcNCQbbGLgV2P61zDa4Lj1baSTHtrSYRQ&s', page: 'g/page83.html' },
+{ name: 'portal 2d', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG-qPrqYQskp9i0qBS4Fj1b1Y9JT3lghQ0yA&s', page: 'g/page28.html' },
+{ name: 'plants vs zombies', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8PQn_izi_R5_jb8F-XOugYIDmBRKNnhC7OA&s', page: 'g/page149.html' },
+{ name: 'Raccooon Retail', imageUrl: 'https://play-lh.googleusercontent.com/zI8P-Gej0l8WK9_rRrVJuHQfZqA97ncD1RCN8qdLbmwl0uxPI8o5JLBsnJz5hxLKTYE', page: 'g/page70.html' },
+{ name: 'retro bowl', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/ee9ca3764ef4289a48a1ebf457ef605441ed1f35a0f2eb12707a70d609e53686.png', page: 'g/page30.html' },
+{ name: 'run3', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMOEhy1C6Fatj9h9RP39dt99bvnkEHfqwExw&s', page: 'g/page31.html' },
+{ name: 'rabbit samuri', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgMLYkUP47XrIW2CP6d7A6f_VOYtdvT74AHQ&s', page: 'g/page109.html' },
+{ name: 'rabbit samuri 2', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIkjFteAj9pnvc7LLlOFgTHva0ogGDCen4GJMGtcaG0eqF1CtyVoMQKVRrNSdq4t_l_tc&usqp=CAU', page: 'g/page110.html' },
+{ name: 'Santy is Home', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUQl_dYQU4lHbR-ICOZ8gyPMtmHY3eLIA1fA&s', page: 'g/page49.html' },
+{ name: 'Sand Boxels', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy27Jf3rN6HyHwihRxZ7neqFxyec11L5fCjlKr0gNgrlp7jwjalACqp094hkHURkb0Fbo&usqp=CAU', page: 'g/page29.html' },
+{ name: 'snake physics', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT__o_6p9YzyPgBhaOvkGeww3F3V9nVgVPnPg&s', page: 'g/page32.html' },
+{ name: 'Stealing the Diamond', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIsJ4RyccCWU4T3OrgLbyJC6RtVmUiZCsshEc76BMVPaO9ss9XrMvsT_y3P_oY5s01Fyo&usqp=CAU', page: 'g/page130.html' },
+{ name: 'Super Hot', imageUrl: 'https://i.kickstarter.com/assets/008/129/926/0f909e9f33010ee6f1d045fe27dbeed2_original.png?anim=false&fit=cover&height=338&origin=ugc&q=92&v=1461504753&width=338&sig=KLSWTtfsx7b9%2FIx472WJtEGY9HBk4rrB1yZQD0Z%2BhyQ%3D', page: 'g/page113.html' },
+{ name: 'slope', imageUrl: 'https://play-lh.googleusercontent.com/uJn2i9h7KxYQarC_c3K4qH6o7gLtflFnhD_dN14MNkzHJ1NeNFzCL69jpB5mT0vCoQs', page: 'g/page33.html' },
+{ name: 'Stickman Hook', imageUrl: 'https://play-lh.googleusercontent.com/yXqBI1Vb1b-xjwmXLE2T7FQbgHIxfvjze1b6jO2aLHfy8Y8ta7NFSEVqZoPHtM2Ajyrl', page: 'g/page77.html' },
+{ name: 'subway surfers', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD8bn7fpuYz317j1s9Y7wEXY2p_YVZlioC1w&s', page: 'g/page34.html' },
+{ name: 'synesthesia', imageUrl: 'https://img.itch.zone/aW1nLzEwNDE3ODIzLnBuZw==/original/Zvb%2FGO.png', page: 'g/page84.html' },
+{ name: 'slide in the woods', imageUrl: 'https://images.sftcdn.net/images/t_app-icon-m/p/762c3c96-d590-4a1d-bc76-3ff1733e5ab4/731272079/slide-in-the-woods-Slide%20in%20the%20woods-icn.png', page: 'g/page132.html' },
+{ name: 'soundboard', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhPbMDLSp5ebGjAcMXHh3OmtmhniAIQtK3_g&s', page: 'g/page65.html' },
+{ name: 'Tactical Assasin 2', imageUrl: 'https://a.silvergames.com/j/b/tactical-assassin-2.jpg', page: 'g/page131.html' },
+{ name: 'temple run 2', imageUrl: 'https://img.poki-cdn.com/cdn-cgi/image/quality=78,width=314,height=314,fit=cover,f=auto/b5c8b617f65be7cc4d56dd3657590ae7.png', page: 'g/page36.html' },
+{ name: 'tanuki sunset', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsLtrmJs8WHrQENCPsiE4mf4ajo5MexRw4fMoXCFD3piog0Xscr0ANZ5Q6m3BG8IFMfoo&usqp=CAU', page: 'g/page37.html' },
+{ name: 'tetris', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ87t64HmfF30GxiRmeMkjUjPQMaW8GmxjTMw&s', page: 'g/page38.html' },
+{ name: 'tiny fishing', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_3-qXPjLzmTc4ZVaXXuus8glmBwkXFlOweg&s', page: 'g/page50.html' },
+{ name: 'the n game', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkrCFPlh04ZBkQCSJYbCLJJoY3aI0bA7dwew&s', page: 'g/page39.html' },
+{ name: 'there is no game', imageUrl: 'https://m.media-amazon.com/images/M/MV5BYTMzZWE2MWYtYjA4ZS00NDgyLThjYzItMTdmODhjMTk5MWU4XkEyXkFqcGc@._V1_.jpg', page: 'g/page51.html' },
+{ name: 'Townscape', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBEKaX2JP9kb-omYuPy3zLyCtDvH7PKlJn8w&s', page: 'g/page52.html' },
+{ name: 'vex 5', imageUrl: 'https://img.gamedistribution.com/f120262ab72743039fbce88c1f370df8-512x512.jpeg', page: 'g/page40.html' },
+{ name: 'vex 6', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKdC8jHCMWtTGsOils4atajZuDdo0X6bAVow&s', page: 'g/page41.html' },
+{ name: 'vex 7', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE-EZmHzIlVpGgiVVHQvEsqBfUfEbnpvb9Nw&s', page: 'g/page42.html' },
+{ name: 'vertigolf', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa3Zg1hQfeU6_sXY5SB9UHc6bm8swfjT7XHg&s', page: 'g/page43.html' },
+{ name: 'world of color', imageUrl: 'https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/072012/disney_world_of_color_logo_small.jpg?itok=A7zBcDIU', page: 'g/page44.html' },
+{ name: 'worlds hardest game', imageUrl: 'https://cdn2.steamgriddb.com/grid/3fd7ced4d1db27c18c95d91b25d9a3a4.png', page: 'g/page111.html' },
+{ name: 'worlds hardest game 2', imageUrl: 'https://images.sftcdn.net/images/t_app-icon-m/p/b81cf0b6-fa0a-46bc-a078-f353fc641adf/124346371/world-s-hardest-game-logo', page: 'g/page112.html' },
+{ name: 'Wordle', imageUrl: 'https://static01.nyt.com/images/2022/03/02/crosswords/alpha-wordle-icon-new/alpha-wordle-icon-new-smallSquare252-v3.png?format=pjpg&quality=75&auto=webp&disable=upscale', page:'g/page101.html' },
+      ];
+
+      function filterGames() {
+        const searchTerm = searchBar.value.toLowerCase();
+        const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchTerm));
+        renderGrid(filteredItems);
+      }
+
+      function renderGrid(filteredItems) {
+        gridContainer.innerHTML = '';
+        filteredItems.forEach(item => {
+          const gridItem = document.createElement('div');
+          gridItem.className = 'grid-item';
+
+          const imageSlot = document.createElement('div');
+          imageSlot.className = 'image-slot';
+
+          const img = document.createElement('img');
+          img.src = item.imageUrl;  
+          img.alt = item.name;  
+          imageSlot.appendChild(img);
+
+          const caption = document.createElement('div');
+          caption.className = 'caption';
+          caption.textContent = item.name;
+
+          gridItem.appendChild(imageSlot);
+          gridItem.appendChild(caption);
+
+          gridItem.onclick = () => {
+            window.open(item.page, '_blank');
+          };
+
+          gridContainer.appendChild(gridItem);
+        });
+      }
+
+      renderGrid(items);  
+    </script>
+  </div>
+</body>
+</html>

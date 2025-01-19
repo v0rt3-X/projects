@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v0rt3X</title>
+        <link rel="shortcut icon" href="assets/logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome link for the gear icon -->
+    <style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    color: white;
+}
+
+.logo-container {
+  display: flex; /* Flexbox for horizontal alignment */
+  align-items: center; /* Align vertically centered */
+  margin-left: 50px; /* Move Skibidi 50px from the edge */
+}
+
+/* Logo image styling */
+.logo-img {
+  width: 30px; /* Increase the width of the logo */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Space between logo and text */
+}
+
+#logo-text {
+  margin: 0; /* Remove default margin from the h1 */
+  font-size: 2rem; /* Ensure the text is large and centered */
+  color: white;
+  text-align: left;
+}
+/* Navigation container (for the Two Players and Games text) */
+.nav-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the navigation links */
+.nav-container a {
+    margin-right: 50px; /* Move the text 50px from the edge */
+    font-size: 1.2rem;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-container a:hover {
+    color: purple; /* Change color on hover */
+}
+
+/* Gear button styling */
+.gear-button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gear-button:hover {
+    background-color: #444;
+}
+
+/* Position the gear button at the bottom left */
+.gear-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000; /* Ensures the button stays on top */
+}
+
+#file-input {
+    display: none;
+}
+
+body {
+    transition: background 0.5s ease-in-out;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+}
+
+body {
+    background-image: url('assets/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #121212; 
+    color: #e0e0e0; 
+}
+
+header {
+    width: 100%;
+    background-color: rebeccapurple; 
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: none;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    text-align: center;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.grid-container {
+    display: grid;
+    grid-wrap: wrap;
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    width: 100%;
+    overflow: auto; 
+    justify-content: center; 
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent; 
+    padding: 10px;
+    border: 1px solid #333; 
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.grid-item:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 0 15px 2px rgba(255, 99, 255, 0.5); 
+}
+
+.image-slot {
+    width: 100px;
+    height: 100px;
+    background-color: transparent; 
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.3s ease; 
+}
+
+.image-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.3s ease; 
+}
+
+.image-slot:hover img {
+    transform: scale(1.1); 
+}
+
+.caption {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e0e0e0; 
+}
+
+.grid-container::-webkit-scrollbar {
+    display: none;
+}
+
+.grid-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+  </style>
+</head>
+<body>
+  <header>
+        <div class="logo-container">
+            <img href="index.html" src="assets/logo.png" alt="Logo" class="logo-img">
+            <h1 id="logo-text">v0rt3X</h1>  
+        </div>
+        <div class="nav-container">
+<a href="g.html">Games</a>
+            <a href="2p.html">Two Players</a>  
+<a href="a.html">Apps</a>
+            <a href="p.html">Proxy</a>
+        </div>
+    </header>
+
+<div class="search-container">
+<input type="text" class="search-bar" id="searchBar" placeholder="Search for a game..." onkeyup="filterGames()">
+</div>
+<div class="gear-container">
+<button id="gear-button" class="gear-button">
+<i class="fas fa-cog"></i> <!-- FontAwesome gear icon -->
+</button>
+<input type="file" id="file-input" accept="image/*" style="display: none;">
+</div>
+
+<script>
+        document.addEventListener('keydown', function(event) {
+            // Check if the pressed key is backslash
+            if (event.key === '\\') {
+                // Navigate to l.html
+                window.location.href = 'l.html';
+            }
+        });
+document.getElementById('logo-text').addEventListener('click', function () {
+localStorage.clear(); // Clear all items from localStorage
+location.reload(); // Reload the page to reset the background
+});
+// Function to change the background image and save it to localStorage
+document.getElementById('file-input').addEventListener('change', function (event) {
+var file = event.target.files[0];
+if (file) {
+var reader = new FileReader();
+
+reader.onload = function (e) {
+// Set the new background image
+document.body.style.backgroundImage = 'url(' + e.target.result + ')';
+// Store the background image in localStorage
+localStorage.setItem('backgroundImage', e.target.result);
+};
+
+reader.readAsDataURL(file);
+}
+});
+
+// Check if a background image is stored in localStorage when the page loads
+window.addEventListener('load', function () {
+const storedBackground = localStorage.getItem('backgroundImage');
+if (storedBackground) {
+document.body.style.backgroundImage = 'url(' + storedBackground + ')';
+}
+});
+document.getElementById('gear-button').addEventListener('click', function () {
+document.getElementById('file-input').click();
+});
+
+document.getElementById('file-input').addEventListener('change', function (event) {
+var file = event.target.files[0];
+if (file) {
+var reader = new FileReader();
+
+reader.onload = function (e) {
+document.body.style.backgroundImage = 'url(' + e.target.result + ')';
+};
+
+reader.readAsDataURL(file);
+}
+});
+</script>
+<div class="grid-container" id="gridContainer">
+<!-- Dynamically generate a large number of items with different images and names -->
+<script>
+const gridContainer = document.querySelector('.grid-container');
+const searchBar = document.getElementById('searchBar');
+
+const items = [
+{ name: 'ArtClass', imageUrl: 'https://avatars.githubusercontent.com/u/116205545?s=280&v=4', page: 'g/page2.html' },
+{ name: 'Anura Pro', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Zip_9Sc-Y6BxhrBhZ770znyfGPcIc-48RQ&s', page: 'g/page145.html' },
+{ name: 'Chess', imageUrl: 'https://static.wikia.nocookie.net/logopedia/images/4/4a/Chess.com_2019_%28App_Icon%29.png/revision/latest/scale-to-width-down/250?cb=20221006103032', page: 'g/page74.html' },
+{ name: 'Cool Math Games', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwROf_FVSh9WkFeG15X-kVysnKddaMHvxSEA&s', page: 'g/page75.html' },
+{ name: 'Discord', imageUrl: 'https://static.vecteezy.com/system/resources/previews/006/892/625/non_2x/discord-logo-icon-editorial-free-vector.jpg', page: 'g/page62.html' },
+{ name: 'GeForce', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsx4PQB6dguKRpeM0xEOtaimEhoGejEYJNqQ&s', page: 'g/page63.html' },
+{ name: 'Google', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDIbudNn2WDl1Lc_jAa_B4bwjPyjIJW-fcoQ&s', page: 'g/page67.html' },
+{ name: 'Ninja.ai', imageUrl: 'https://ipfs.io/ipfs/QmP4s7JqWtTYzP4m8xM4CMcxMeqicRoszoZVpuSu7Jad3c', page: 'g/page61.html' },
+{ name: 'Spotify', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmn49U8s0si8AOcPjFxKDmNNaL9HJsgNdulA&s', page: 'g/page66.html' },
+{ name: 'TikTok', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkuJhoBifc904AlWJdNNoIaAwALpBy_yL5tQ&s', page: 'g/page64.html' },
+{ name: 'Poe AI', imageUrl: 'https://www.fahimai.com/wp-content/uploads/2024/06/Untitled-design-11.png', page: 'g/page59.html' }
+
+
+];
+
+function filterGames() {
+const searchTerm = searchBar.value.toLowerCase();
+const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchTerm));
+renderGrid(filteredItems);
+}
+
+function renderGrid(filteredItems) {
+gridContainer.innerHTML = '';
+filteredItems.forEach(item => {
+const gridItem = document.createElement('div');
+gridItem.className = 'grid-item';
+
+const imageSlot = document.createElement('div');
+imageSlot.className = 'image-slot';
+
+const img = document.createElement('img');
+img.src = item.imageUrl;
+img.alt = item.name;
+imageSlot.appendChild(img);
+
+const caption = document.createElement('div');
+caption.className = 'caption';
+caption.textContent = item.name;
+
+gridItem.appendChild(imageSlot);
+gridItem.appendChild(caption);
+
+gridItem.onclick = () => {
+window.open(item.page, '_blank');
+};
+
+gridContainer.appendChild(gridItem);
+});
+}
+
+renderGrid(items);
+
+</script>
+</div>
+</body>
+</html>
