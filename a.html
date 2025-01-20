@@ -3,9 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>v0rt3X</title>
-        <link rel="shortcut icon" href="assets/logo.png" type="image/png">
+  <title>v0rt3X | Apps</title>
+        <link rel="shortcut icon" href="assets/logo2.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome link for the gear icon -->
+            <script>
+        // Theme loader - add this to every page
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('v0rt3x-theme');
+            if (savedTheme) {
+                const theme = JSON.parse(savedTheme);
+                document.body.style.backgroundImage = `url('${theme.background}')`;
+                const header = document.querySelector('header');
+                if (header) {
+                    header.style.backgroundColor = theme.headerColor;
+                }
+            }
+        }
+        
+        // Load theme as soon as possible
+        document.addEventListener('DOMContentLoaded', loadSavedTheme);
+        // Also try to load immediately in case DOMContentLoaded already fired
+        loadSavedTheme();
+    </script>
     <style>
 body {
     margin: 0;
@@ -221,7 +240,7 @@ header {
 <body>
   <header>
         <div class="logo-container">
-            <img href="index.html" src="assets/logo.png" alt="Logo" class="logo-img">
+            <a href="index.html"><img src="assets/logo.png" alt="Logo" class="logo-img"></a>
             <h1 id="logo-text">v0rt3X</h1>  
         </div>
         <div class="nav-container">
@@ -243,56 +262,29 @@ header {
 </div>
 
 <script>
-        document.addEventListener('keydown', function(event) {
-            // Check if the pressed key is backslash
-            if (event.key === '\\') {
-                // Navigate to l.html
-                window.location.href = 'l.html';
-            }
-        });
-document.getElementById('logo-text').addEventListener('click', function () {
-localStorage.clear(); // Clear all items from localStorage
-location.reload(); // Reload the page to reset the background
+document.addEventListener('keydown', function(event) {
+    // Check if the pressed key is backslash
+    if (event.key === '\\') {
+        // Navigate to l.html
+        window.location.href = 'l.html';
+    }
 });
-// Function to change the background image and save it to localStorage
-document.getElementById('file-input').addEventListener('change', function (event) {
-var file = event.target.files[0];
-if (file) {
-var reader = new FileReader();
 
-reader.onload = function (e) {
-// Set the new background image
-document.body.style.backgroundImage = 'url(' + e.target.result + ')';
-// Store the background image in localStorage
-localStorage.setItem('backgroundImage', e.target.result);
-};
+document.getElementById('logo-text').addEventListener('click', function () {
+    window.location.href = ('index.html')
+});
 
-reader.readAsDataURL(file);
-}
+// Modified gear button click handler to navigate to settings.html
+document.getElementById('gear-button').addEventListener('click', function () {
+    window.location.href = 'setting.html';
 });
 
 // Check if a background image is stored in localStorage when the page loads
 window.addEventListener('load', function () {
-const storedBackground = localStorage.getItem('backgroundImage');
-if (storedBackground) {
-document.body.style.backgroundImage = 'url(' + storedBackground + ')';
-}
-});
-document.getElementById('gear-button').addEventListener('click', function () {
-document.getElementById('file-input').click();
-});
-
-document.getElementById('file-input').addEventListener('change', function (event) {
-var file = event.target.files[0];
-if (file) {
-var reader = new FileReader();
-
-reader.onload = function (e) {
-document.body.style.backgroundImage = 'url(' + e.target.result + ')';
-};
-
-reader.readAsDataURL(file);
-}
+    const storedBackground = localStorage.getItem('backgroundImage');
+    if (storedBackground) {
+        document.body.style.backgroundImage = 'url(' + storedBackground + ')';
+    }
 });
 </script>
 <div class="grid-container" id="gridContainer">
@@ -302,17 +294,17 @@ const gridContainer = document.querySelector('.grid-container');
 const searchBar = document.getElementById('searchBar');
 
 const items = [
-{ name: 'ArtClass', imageUrl: 'https://avatars.githubusercontent.com/u/116205545?s=280&v=4', page: 'g/page2.html' },
-{ name: 'Anura Pro', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Zip_9Sc-Y6BxhrBhZ770znyfGPcIc-48RQ&s', page: 'g/page145.html' },
-{ name: 'Chess', imageUrl: 'https://static.wikia.nocookie.net/logopedia/images/4/4a/Chess.com_2019_%28App_Icon%29.png/revision/latest/scale-to-width-down/250?cb=20221006103032', page: 'g/page74.html' },
-{ name: 'Cool Math Games', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwROf_FVSh9WkFeG15X-kVysnKddaMHvxSEA&s', page: 'g/page75.html' },
-{ name: 'Discord', imageUrl: 'https://static.vecteezy.com/system/resources/previews/006/892/625/non_2x/discord-logo-icon-editorial-free-vector.jpg', page: 'g/page62.html' },
-{ name: 'GeForce', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsx4PQB6dguKRpeM0xEOtaimEhoGejEYJNqQ&s', page: 'g/page63.html' },
-{ name: 'Google', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDIbudNn2WDl1Lc_jAa_B4bwjPyjIJW-fcoQ&s', page: 'g/page67.html' },
-{ name: 'Ninja.ai', imageUrl: 'https://ipfs.io/ipfs/QmP4s7JqWtTYzP4m8xM4CMcxMeqicRoszoZVpuSu7Jad3c', page: 'g/page61.html' },
-{ name: 'Spotify', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmn49U8s0si8AOcPjFxKDmNNaL9HJsgNdulA&s', page: 'g/page66.html' },
-{ name: 'TikTok', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkuJhoBifc904AlWJdNNoIaAwALpBy_yL5tQ&s', page: 'g/page64.html' },
-{ name: 'Poe AI', imageUrl: 'https://www.fahimai.com/wp-content/uploads/2024/06/Untitled-design-11.png', page: 'g/page59.html' }
+{ name: 'ArtClass', imageUrl: 'https://avatars.githubusercontent.com/u/116205545?s=280&v=4', page: 'a/page1.html' },
+{ name: 'Anura Pro', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Zip_9Sc-Y6BxhrBhZ770znyfGPcIc-48RQ&s', page: 'a/page2.html' },
+{ name: 'Chess', imageUrl: 'https://static.wikia.nocookie.net/logopedia/images/4/4a/Chess.com_2019_%28App_Icon%29.png/revision/latest/scale-to-width-down/250?cb=20221006103032', page: 'a/page3.html' },
+{ name: 'Cool Math Games', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwROf_FVSh9WkFeG15X-kVysnKddaMHvxSEA&s', page: 'a/page4.html' },
+{ name: 'Discord', imageUrl: 'https://static.vecteezy.com/system/resources/previews/006/892/625/non_2x/discord-logo-icon-editorial-free-vector.jpg', page: 'a/page5.html' },
+{ name: 'GeForce', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsx4PQB6dguKRpeM0xEOtaimEhoGejEYJNqQ&s', page: 'a/page6.html' },
+{ name: 'Google', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDIbudNn2WDl1Lc_jAa_B4bwjPyjIJW-fcoQ&s', page: 'a/page7.html' },
+{ name: 'Ninja.ai', imageUrl: 'https://ipfs.io/ipfs/QmP4s7JqWtTYzP4m8xM4CMcxMeqicRoszoZVpuSu7Jad3c', page: 'a/page8.html' },
+{ name: 'Spotify', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmn49U8s0si8AOcPjFxKDmNNaL9HJsgNdulA&s', page: 'a/page9.html' },
+{ name: 'TikTok', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkuJhoBifc904AlWJdNNoIaAwALpBy_yL5tQ&s', page: 'a/page10.html' },
+{ name: 'Poe AI', imageUrl: 'https://www.fahimai.com/wp-content/uploads/2024/06/Untitled-design-11.png', page: 'a/page11.html' }
 
 
 ];

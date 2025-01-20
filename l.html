@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>v0rt3X | Proxy</title>
+  <title>v0rt3X | Learn</title>
         <link rel="shortcut icon" href="assets/logo2.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome link for the gear icon -->
             <script>
@@ -267,7 +267,6 @@ header {
         </div>
     </header>
     <script>
-        // Add event listener for keydown events
         document.addEventListener('keydown', function(event) {
             // Check if the pressed key is backslash
             if (event.key === '\\') {
@@ -275,14 +274,17 @@ header {
                 window.location.href = 'l.html';
             }
         });
+                const urlParams = new URLSearchParams(window.location.search);
+    const itemId = urlParams.get('id');
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const itemId = urlParams.get('id');
-        console.log("Clicked item ID:2", itemId);
-        const iframe = document.createElement('iframe');
-        iframe.allowfullscreen = true;
-        iframe.src = "https://doggy.artclass.site/service/hvtr%3A-%2Feomgne%2Ccmm-";
-        document.body.appendChild(iframe);
+    // If the 'id' is found, log it or use it to customize content
+    console.log("Clicked item ID:2", itemId);
+
+    // Insert the iframe
+    const iframe = document.createElement('iframe');
+    iframe.allowfullscreen = true;
+    iframe.src = "https://doggy.artclass.site/service/hvtrs8%2F-d%7Bcnaqspomm%2Ccmm-"; // Or any URL you want to display in the iframe
+    document.body.appendChild(iframe);
         
         document.getElementById('logo-text').addEventListener('click', function () {
     window.location.href = ('index.html')

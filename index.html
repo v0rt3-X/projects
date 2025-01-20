@@ -1,53 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>v0rt3X</title>
-        <link rel="shortcut icon" href="assets/logo.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v0rt3X | Home</title>
+        <link rel="shortcut icon" href="assets/logo2.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome link for the gear icon -->
+            <script>
+        // Theme loader - add this to every page
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('v0rt3x-theme');
+            if (savedTheme) {
+                const theme = JSON.parse(savedTheme);
+                document.body.style.backgroundImage = `url('${theme.background}')`;
+                const header = document.querySelector('header');
+                if (header) {
+                    header.style.backgroundColor = theme.headerColor;
+                }
+            }
+        }
+        
+        // Load theme as soon as possible
+        document.addEventListener('DOMContentLoaded', loadSavedTheme);
+        // Also try to load immediately in case DOMContentLoaded already fired
+        loadSavedTheme();
+    </script>
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background-color: #121212; /* Dark background for dark mode */
-            color: white; /* Default text color for dark mode */
-        }
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  text-align: center;
+  color: #e0e0e0;
+}
 
-        .container {
-            text-align: center;
-        }
+  .launch-button {
+    background-color: rebeccapurple;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0px;
+  }
 
-        .heading {
-            font-size: 4em;
-            margin-bottom: 200px; /* Moved Skibidi higher on the page */
-        }
+  .launch-button:hover {
+    background-color: #6a3d9a;
+  }
 
-        .button {
-            padding: 30px 60px;
-            font-size: 2em;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            text-decoration: none;
-        }
+  .welcome-text {
+    font-size: 3rem;
+    font-weight: bold;
+  }
 
-        .button:hover {
-            background-color: #45a049;
-        }
-    </style>
+  .vortex {
+    color: purple; /* Use light purple color */
+    font-weight: bold;
+  }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    color: white;
+}
+
+.logo-container {
+  display: flex; /* Flexbox for horizontal alignment */
+  align-items: center; /* Align vertically centered */
+  margin-left: 50px; /* Move Skibidi 50px from the edge */
+}
+
+/* Logo image styling */
+.logo-img {
+  width: 30px; /* Increase the width of the logo */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Space between logo and text */
+}
+
+#logo-text {
+  margin: 0; /* Remove default margin from the h1 */
+  font-size: 2rem; /* Ensure the text is large and centered */
+  color: white;
+  text-align: left;
+}
+/* Navigation container (for the Two Players and Games text) */
+.nav-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the navigation links */
+.nav-container a {
+    margin-right: 50px; /* Move the text 50px from the edge */
+    font-size: 1.2rem;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-container a:hover {
+    color: purple; /* Change color on hover */
+}
+
+/* Gear button styling */
+.gear-button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gear-button:hover {
+    background-color: #444;
+}
+
+/* Position the gear button at the bottom left */
+.gear-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000; /* Ensures the button stays on top */
+}
+
+#file-input {
+    display: none;
+}
+
+body {
+    transition: background 0.5s ease-in-out;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+}
+
+body {
+    background-image: url('assets/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #121212; 
+    color: #e0e0e0; 
+}
+
+header {
+    width: 100%;
+    background-color: rebeccapurple; 
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: none;
+}
+  </style>
 </head>
 <body>
+  <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="assets/logo.png" alt="Logo" class="logo-img"></a>
+            <h1 id="logo-text">v0rt3X</h1>  
+        </div>
+        <div class="nav-container">
+<a href="g.html">Games</a>
+            <a href="2p.html">Two Players</a>  
+<a href="a.html">Apps</a>
+            <a href="p.html">Proxy</a>
+        </div>
+    </header>
+<div class="gear-container">
+<button id="gear-button" class="gear-button">
+<i class="fas fa-cog"></i> <!-- FontAwesome gear icon -->
+</button>
+<input type="file" id="file-input" accept="image/*" style="display: none;">
+</div>
+<div class="center-content">
+  <p class="welcome-text">WELCOME TO <span class="vortex">v0rt3X</span></p>
+  <button class="launch-button" onclick="window.location.href = 'g.html'">Get Started</button>
+</div>
+    <script>
+              document.addEventListener('keydown', function(event) {
+    // Check if the pressed key is backslash
+    if (event.key === '\\') {
+        // Navigate to l.html
+        window.location.href = 'l.html';
+    }
+});
 
-    <div class="container">
-        <div class="heading" style="color: white;">v0rt3X</div>
-        <a href="g.html" class="button">GAMES</a>
-    </div>
+document.getElementById('logo-text').addEventListener('click', function () {
+    window.location.href = ('index.html')
+});
 
+// Modified gear button click handler to navigate to settings.html
+document.getElementById('gear-button').addEventListener('click', function () {
+    window.location.href = 'setting.html';
+});
+
+// Check if a background image is stored in localStorage when the page loads
+window.addEventListener('load', function () {
+    const storedBackground = localStorage.getItem('backgroundImage');
+    if (storedBackground) {
+        document.body.style.backgroundImage = 'url(' + storedBackground + ')';
+    }
+});
+</script>
 </body>
 </html>

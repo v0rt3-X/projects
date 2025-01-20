@@ -6,6 +6,26 @@
   <title>v0rt3X | Games</title>
         <link rel="shortcut icon" href="assets/logo2.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome link for the gear icon -->
+        <script>
+        // Theme loader - add this to every page
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('v0rt3x-theme');
+            if (savedTheme) {
+                const theme = JSON.parse(savedTheme);
+                document.body.style.backgroundImage = `url('${theme.background}')`;
+                const header = document.querySelector('header');
+                if (header) {
+                    header.style.backgroundColor = theme.headerColor;
+                }
+            }
+        }
+        
+        // Load theme as soon as possible
+        document.addEventListener('DOMContentLoaded', loadSavedTheme);
+        // Also try to load immediately in case DOMContentLoaded already fired
+        loadSavedTheme();
+    </script>
+
     <style>
 body {
     margin: 0;
@@ -243,57 +263,30 @@ header {
     </div>
 
     <script>
-        document.addEventListener('keydown', function(event) {
-            // Check if the pressed key is backslash
-            if (event.key === '\\') {
-                // Navigate to l.html
-                window.location.href = 'l.html';
-            }
-        });
-document.getElementById('logo-text').addEventListener('click', function () {
-localStorage.clear(); // Clear all items from localStorage
-location.reload(); // Reload the page to reset the background
+       document.addEventListener('keydown', function(event) {
+    // Check if the pressed key is backslash
+    if (event.key === '\\') {
+        // Navigate to l.html
+        window.location.href = 'l.html';
+    }
 });
-// Function to change the background image and save it to localStorage
-document.getElementById('file-input').addEventListener('change', function (event) {
-  var file = event.target.files[0];
-  if (file) {
-    var reader = new FileReader();
-    
-    reader.onload = function (e) {
-      // Set the new background image
-      document.body.style.backgroundImage = 'url(' + e.target.result + ')';
-      // Store the background image in localStorage
-      localStorage.setItem('backgroundImage', e.target.result);
-    };
-    
-    reader.readAsDataURL(file);
-  }
+
+document.getElementById('logo-text').addEventListener('click', function () {
+    window.location.href = ('index.html')
+});
+
+// Modified gear button click handler to navigate to settings.html
+document.getElementById('gear-button').addEventListener('click', function () {
+    window.location.href = 'setting.html';
 });
 
 // Check if a background image is stored in localStorage when the page loads
 window.addEventListener('load', function () {
-  const storedBackground = localStorage.getItem('backgroundImage');
-  if (storedBackground) {
-    document.body.style.backgroundImage = 'url(' + storedBackground + ')';
-  }
+    const storedBackground = localStorage.getItem('backgroundImage');
+    if (storedBackground) {
+        document.body.style.backgroundImage = 'url(' + storedBackground + ')';
+    }
 });
-	document.getElementById('gear-button').addEventListener('click', function () {
-            document.getElementById('file-input').click();
-        });
-
-        document.getElementById('file-input').addEventListener('change', function (event) {
-            var file = event.target.files[0];
-            if (file) {
-                var reader = new FileReader();
-                
-                reader.onload = function (e) {
-                    document.body.style.backgroundImage = 'url(' + e.target.result + ')';
-                };
-                
-                reader.readAsDataURL(file);
-            }
-        });
     </script>
   <div class="grid-container" id="gridContainer">
     <!-- Dynamically generate a large number of items with different images and names -->
@@ -306,7 +299,7 @@ window.addEventListener('load', function () {
   { name: 'Adventure Capitalist', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHLEqTx0JVWICBFgQIhcHe2VZbKDBO0aFGPw&s', page: 'g/page142.html' },
   { name: 'Avalanche', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPtl_GirhWJtrquAuIRXpEaMU_gYACFb6jXw&s', page: 'g/page93.html' },
   { name: 'Amist the Sky', imageUrl: 'https://img.itch.zone/aW1nLzU3NjQxNTkucG5n/original/BJ51xh.png', page: 'g/page128.html' },
-  { name: 'an avg day at a cat cafe', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFnQ5xrdtEduAESiO8L9S69X4iJNp0iEVPXw&s', page: 'g/page4.html' },
+  { name: 'an avg cat cafe', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFnQ5xrdtEduAESiO8L9S69X4iJNp0iEVPXw&s', page: 'g/page4.html' },
   { name: 'avoid the color', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN5HNq9RHzxVxHNX8skCD25aO9-YoSKzL5WA&s', page: 'g/page5.html' },
   { name: 'avoid the void', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiHz8Wav-SbF7PvLslWYFGQ_AHyPFu-LAiJA&s', page: 'g/page6.html' },
   { name: 'Agar.IO', imageUrl: 'https://static.wikia.nocookie.net/logopedia/images/0/0d/Agariom.png/revision/latest?cb=20220701110334', page: 'g/page21.html' },
@@ -392,7 +385,7 @@ window.addEventListener('load', function () {
 { name: 'Santy is Home', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUQl_dYQU4lHbR-ICOZ8gyPMtmHY3eLIA1fA&s', page: 'g/page49.html' },
 { name: 'Sand Boxels', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy27Jf3rN6HyHwihRxZ7neqFxyec11L5fCjlKr0gNgrlp7jwjalACqp094hkHURkb0Fbo&usqp=CAU', page: 'g/page29.html' },
 { name: 'snake physics', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT__o_6p9YzyPgBhaOvkGeww3F3V9nVgVPnPg&s', page: 'g/page32.html' },
-{ name: 'Stealing the Diamond', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIsJ4RyccCWU4T3OrgLbyJC6RtVmUiZCsshEc76BMVPaO9ss9XrMvsT_y3P_oY5s01Fyo&usqp=CAU', page: 'g/page130.html' },
+{ name: 'Stealing the Diamnd', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIsJ4RyccCWU4T3OrgLbyJC6RtVmUiZCsshEc76BMVPaO9ss9XrMvsT_y3P_oY5s01Fyo&usqp=CAU', page: 'g/page130.html' },
 { name: 'Super Hot', imageUrl: 'https://i.kickstarter.com/assets/008/129/926/0f909e9f33010ee6f1d045fe27dbeed2_original.png?anim=false&fit=cover&height=338&origin=ugc&q=92&v=1461504753&width=338&sig=KLSWTtfsx7b9%2FIx472WJtEGY9HBk4rrB1yZQD0Z%2BhyQ%3D', page: 'g/page113.html' },
 { name: 'slope', imageUrl: 'https://play-lh.googleusercontent.com/uJn2i9h7KxYQarC_c3K4qH6o7gLtflFnhD_dN14MNkzHJ1NeNFzCL69jpB5mT0vCoQs', page: 'g/page33.html' },
 { name: 'Stickman Hook', imageUrl: 'https://play-lh.googleusercontent.com/yXqBI1Vb1b-xjwmXLE2T7FQbgHIxfvjze1b6jO2aLHfy8Y8ta7NFSEVqZoPHtM2Ajyrl', page: 'g/page77.html' },
@@ -446,7 +439,7 @@ window.addEventListener('load', function () {
           gridItem.appendChild(caption);
 
           gridItem.onclick = () => {
-            window.location.href = (item.page);
+            window.open(item.page, '_blank');
           };
 
           gridContainer.appendChild(gridItem);
@@ -454,6 +447,22 @@ window.addEventListener('load', function () {
       }
 
       renderGrid(items);  
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('v0rt3x-theme');
+            if (savedTheme) {
+                const theme = JSON.parse(savedTheme);
+                document.body.style.backgroundImage = `url('${theme.background}')`;
+                const header = document.querySelector('header');
+                if (header) {
+                    header.style.backgroundColor = theme.headerColor;
+                }
+            }
+        }
+        
+        // Load theme as soon as possible
+        document.addEventListener('DOMContentLoaded', loadSavedTheme);
+        // Also try to load immediately in case DOMContentLoaded already fired
+        loadSavedTheme();
     </script>
   </div>
 </body>
