@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="v0rt3X">
+    <meta name="keywords" content="Games, Apps, Proxy, Custom">
+    <meta name="description" content="A game center with 100+ games, many apps, and a working proxy. Created by v0rt3X.">
   <title>v0rt3X | Home</title>
         <link rel="shortcut icon" href="assets/logo2.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome link for the gear icon -->
@@ -25,7 +28,68 @@
         // Also try to load immediately in case DOMContentLoaded already fired
         loadSavedTheme();
     </script>
+    
     <style>
+                .js-console {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 8px;
+            padding: 15px;
+            width: 300px;
+            z-index: 1000;
+        }
+
+        .js-input {
+            width: 100%;
+            height: 100px;
+            background: #1e1e1e;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 8px;
+            font-family: monospace;
+            margin-bottom: 10px;
+        }
+
+        .run-js-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .run-js-btn:hover {
+            background: #45a049;
+        }
+
+        .console-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rebeccapurple;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #000000;
+    display: none;
+}
+
 .center-content {
   display: flex;
   flex-direction: column;
@@ -181,56 +245,447 @@ header {
     font-weight: bold;
     border-bottom: none;
 }
+        #matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    display: none;
+}
   </style>
+    <script>
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('v0rt3x-theme');
+            if (savedTheme) {
+                const themeSettings = JSON.parse(savedTheme);
+
+                if (themeSettings.themeName === "Matrix Theme") {
+                    document.body.style.backgroundImage = 'none';
+                    document.body.style.backgroundColor = '#000000';
+                    document.querySelector('header').style.backgroundColor = '#003300';
+
+                    const matrixCanvas = document.getElementById('matrix-canvas');
+                    if (matrixCanvas) {
+                        matrixCanvas.style.display = 'block';
+                        if (matrixCanvas.dataset.animationId) {
+                            cancelAnimationFrame(parseInt(matrixCanvas.dataset.animationId));
+                        }
+                        // Make sure your matrix initialization function is available and uses this color
+                        initMatrix(themeSettings.matrixColor || '#00FF00');
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadSavedTheme);
+    </script>
 </head>
 <body>
-  <header>
+
+    <div id="particles-js"></div>
+    <canvas id="matrix-canvas" style="position: fixed; top: 0; left: 0; z-index: -1; display: none;"></canvas>
+    <header>
         <div class="logo-container">
             <a href="index.html"><img src="assets/logo.png" alt="Logo" class="logo-img"></a>
-            <h1 id="logo-text">v0rt3X</h1>  
+            <h1 id="logo-text">v0rt3X</h1>
         </div>
         <div class="nav-container">
-<a href="g.html">Games</a>
-            <a href="2p.html">Two Players</a>  
-<a href="a.html">Apps</a>
+            <a href="g.html">Games</a>
+            <a href="2p.html">Two Players</a>
+            <a href="a.html">Apps</a>
             <a href="p.html">Proxy</a>
         </div>
     </header>
-<div class="gear-container">
-<button id="gear-button" class="gear-button">
-<i class="fas fa-cog"></i> <!-- FontAwesome gear icon -->
-</button>
-<input type="file" id="file-input" accept="image/*" style="display: none;">
-</div>
-<div class="center-content">
-  <p class="welcome-text">WELCOME TO <span class="vortex">v0rt3X</span></p>
-  <button class="launch-button" onclick="window.location.href = 'g.html'">Get Started</button>
-</div>
+
+    <div class="gear-container">
+        <button id="gear-button" class="gear-button">
+            <i class="fas fa-cog"></i> <!-- FontAwesome gear icon -->
+        </button>
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
+    </div>
+    <div class="center-content">
+        <p class="welcome-text">WELCOME TO <span class="vortex">v0rt3X</span></p>
+        <button class="launch-button" onclick="window.location.href = 'g.html'">Get Started</button>
+    </div>
+    <button class="console-toggle" onclick="toggleConsole()">Toggle JS Console</button>
+    <div class="js-console" style="display: none;">
+        <textarea class="js-input" placeholder="Enter JavaScript code here..."></textarea>
+        <button class="run-js-btn" onclick="runCustomJS()">Run Code</button>
+    </div>
     <script>
-              document.addEventListener('keydown', function(event) {
-    // Check if the pressed key is backslash
-    if (event.key === '\\') {
-        // Navigate to l.html
-        window.location.href = 'l.html';
-    }
-});
+        document.addEventListener('keydown', function (event) {
+            // Check if the pressed key is backslash
+            if (event.key === '\\') {
+                // Navigate to l.html
+                window.location.href = 'l.html';
+            }
+        });
 
-document.getElementById('logo-text').addEventListener('click', function () {
-    window.location.href = ('index.html')
-});
+        document.getElementById('logo-text').addEventListener('click', function () {
+            window.location.href = ('index.html')
+        });
 
-// Modified gear button click handler to navigate to settings.html
-document.getElementById('gear-button').addEventListener('click', function () {
-    window.location.href = 'setting.html';
-});
+        // Modified gear button click handler to navigate to settings.html
+        document.getElementById('gear-button').addEventListener('click', function () {
+            window.location.href = 'setting.html';
+        });
 
-// Check if a background image is stored in localStorage when the page loads
-window.addEventListener('load', function () {
-    const storedBackground = localStorage.getItem('backgroundImage');
-    if (storedBackground) {
-        document.body.style.backgroundImage = 'url(' + storedBackground + ')';
-    }
-});
-</script>
+        // Check if a background image is stored in localStorage when the page loads
+        window.addEventListener('load', function () {
+            const storedBackground = localStorage.getItem('backgroundImage');
+            if (storedBackground) {
+                document.body.style.backgroundImage = 'url(' + storedBackground + ')';
+            }
+        });
+    </script>
+    <!-- Add this in the <head> section of each page, after your other stylesheet links -->
+    <div id="particles-js"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+    function toggleConsole() {
+            const console = document.querySelector('.js-console');
+            console.style.display = console.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function runCustomJS() {
+            const code = document.querySelector('.js-input').value;
+            try {
+                // Create a new function from the code and run it in a separate scope
+                const result = new Function(code)();
+                alert('Code executed successfully!');
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }</script>
+    <script>
+        function initializeParticles(color = '#4B0082') {
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 150,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: color
+                    },
+                    shape: {
+                        type: 'circle',
+                        stroke: {
+                            width: 0,
+                            color: '#000000'
+                        }
+                    },
+                    opacity: {
+                        value: 1,
+                        random: false
+                    },
+                    size: {
+                        value: 4,
+                        random: true
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1.6,
+                        direction: 'top',
+                        random: false,
+                        straight: false,
+                        out_mode: 'out'
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 145,
+                        color: color,
+                        opacity: 1,
+                        width: 2
+                    }
+                },
+                interactivity: {
+                    detect_on: 'window',
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: 'grab'
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: 'push'
+                        }
+                    },
+                    modes: {
+                        repulse: {
+                            distance: 100,
+                            duration: 0.25
+                        },
+                        grab: {
+                            distance: 155
+                        },
+                        push: {
+                            particles_nb: 4
+                        }
+                    }
+                },
+                retina_detect: true,
+                fps_limit: 60
+            });
+        }
+
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('v0rt3x-theme');
+            if (savedTheme) {
+                const theme = JSON.parse(savedTheme);
+
+                // Handle background
+                if (theme.background === 'none') {
+                    document.body.style.backgroundImage = 'none';
+                    document.body.style.backgroundColor = '#000000';
+                } else {
+                    document.body.style.backgroundImage = `url('${theme.background}')`;
+                }
+
+                // Handle header color
+                const header = document.querySelector('header');
+                if (header) {
+                    header.style.backgroundColor = theme.headerColor;
+                }
+
+                // Handle particles
+                const particleContainer = document.getElementById('particles-js');
+                if (particleContainer) {
+                    if (theme.themeName === "Particle Theme") {
+                        particleContainer.style.display = 'block';
+                        if (window.particlesJS) {
+                            initializeParticles(theme.particleColor || '#4B0082');
+                        }
+                    } else {
+                        particleContainer.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        // Add CSS for particles container
+        const style = document.createElement('style');
+        style.textContent = `
+            #particles-js {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                background-color: #000000;
+                display: none;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Run on page load
+        document.addEventListener('DOMContentLoaded', loadSavedTheme);
+        // Also run immediately in case DOM is already loaded
+        loadSavedTheme();
+    </script>
+    <script>
+        function initMatrix(color) {
+            const canvas = document.getElementById('matrix-canvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()";
+            const charSize = 20;
+            const columns = canvas.width / charSize;
+            const drops = new Array(Math.floor(columns)).fill(1);
+
+            let frameCount = 0;
+
+            function draw() {
+                frameCount++;
+
+                // Only update every 4 frames
+                if (frameCount % 4 === 0) {
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    ctx.fillStyle = color;
+                    ctx.font = `${charSize}px monospace`;
+
+                    for (let i = 0; i < drops.length; i++) {
+                        const text = chars[Math.floor(Math.random() * chars.length)];
+                        ctx.fillText(text, i * charSize, drops[i] * charSize);
+
+                        if (drops[i] * charSize > canvas.height && Math.random() > 0.99) {
+                            drops[i] = 0;
+                        }
+                        drops[i]++;
+                    }
+                }
+
+                canvas.dataset.animationId = requestAnimationFrame(draw);
+            }
+
+            draw();
+        }
+
+        // Keep the window resize handler
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('matrix-canvas');
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        });
+    </script>
+    <!-- Add these elements right after the opening <body> tag -->
+    <div id="particles-js"></div>
+    <canvas id="matrix-canvas" style="position: fixed; top: 0; left: 0; z-index: -1; display: none;"></canvas>
+
+    <!-- Add these scripts right before the closing </body> tag -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Function to initialize snow effect
+        function initSnowEffect() {
+            const particleContainer = document.getElementById('particles-js');
+            if (!particleContainer) {
+                const container = document.createElement('div');
+                container.id = 'particles-js';
+                document.body.appendChild(container);
+            }
+
+            particleContainer.style.display = 'block';
+            particleContainer.style.backgroundColor = 'transparent';
+
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 100,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: "#ffffff"
+                    },
+                    shape: {
+                        type: "circle",
+                    },
+                    opacity: {
+                        value: 0.7,
+                        random: false,
+                    },
+                    size: {
+                        value: 4,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 2,
+                            size_min: 1,
+                            sync: false
+                        }
+                    },
+                    line_linked: {
+                        enable: false,
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "bottom",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false,
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "bubble"
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: "repulse"
+                        },
+                        resize: true
+                    },
+                    modes: {
+                        bubble: {
+                            distance: 200,
+                            size: 6,
+                            duration: 0.3,
+                            opacity: 1,
+                            speed: 3
+                        },
+                        repulse: {
+                            distance: 200,
+                            duration: 0.4
+                        }
+                    }
+                },
+                retina_detect: true
+            });
+        }
+
+        // Function to check and load theme
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('v0rt3x-theme');
+            if (savedTheme) {
+                const themeSettings = JSON.parse(savedTheme);
+
+                if (themeSettings.themeName === "Christmas Theme") {
+                    if (themeSettings.background === 'none') {
+                        document.body.style.backgroundImage = 'none';
+                        document.body.style.backgroundColor = '#000000';
+                    } else {
+                        document.body.style.backgroundImage = `url('${themeSettings.background}')`;
+                    }
+
+                    const header = document.querySelector('header');
+                    if (header) {
+                        header.style.backgroundColor = themeSettings.headerColor;
+                    }
+
+                    initSnowEffect();
+                }
+            }
+        }
+
+        // Add required CSS
+        const snowStyles = document.createElement('style');
+        snowStyles.textContent = `
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            background-color: transparent;
+        }
+
+        header {
+            z-index: 2;
+            position: relative;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+`;
+        document.head.appendChild(snowStyles);
+
+        // Load theme when DOM is ready
+        document.addEventListener('DOMContentLoaded', loadSavedTheme);
+    </script>
 </body>
 </html>

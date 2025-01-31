@@ -6,205 +6,165 @@
     <title>v0rt3X | Themes</title>
     <link rel="shortcut icon" href="assets/logo2.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <script>
-        // Theme loader - add this to every page
-        function loadSavedTheme() {
-            const savedTheme = localStorage.getItem('v0rt3x-theme');
-            if (savedTheme) {
-                const theme = JSON.parse(savedTheme);
-                document.body.style.backgroundImage = `url('${theme.background}')`;
-                const header = document.querySelector('header');
-                if (header) {
-                    header.style.backgroundColor = theme.headerColor;
-                }
-            }
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
         }
 
-        document.addEventListener('DOMContentLoaded', loadSavedTheme);
-        loadSavedTheme();
-    </script>
-
-    <style>
-        * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-}
-
-body {
-font-family: Arial, sans-serif;
-margin: 0;
-padding: 0;
-background-image: url('assets/background.jpg');
-background-size: cover;
-background-repeat: no-repeat;
-background-attachment: fixed;
-color: #e0e0e0;
-min-height: 100vh;
-transition: background-image 0.5s ease;
-}
-
-header {
-width: 100%;
-background-color: rebeccapurple;
-color: white;
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 10px 20px;
-border-bottom: none;
-transition: background-color 0.5s ease;
-}
-
-.logo-container {
-display: flex;
-align-items: center;
-margin-left: 30px;
-}
-
-.logo-img {
-width: 30px;
-height: auto;
-margin-right: 10px;
-}
-
-#logo-text {
-margin: 0;
-font-size: 2rem;
-color: white;
-text-align: left;
-}
-
-.nav-container {
-display: flex;
-align-items: center;
-}
-
-.nav-container a {
-margin-right: 50px;
-font-size: 1.2rem;
-color: white;
-text-decoration: none;
-font-weight: bold;
-}
-
-.nav-container a:hover {
-color: purple;
-}
-
-.container {
-max-width: 1400px;
-margin: 0 auto;
-padding: 2rem;
-}
-
-.marketplace-header {
-text-align: center;
-margin-bottom: 3rem;
-color: white;
-}
-
-.marketplace-header h1 {
-font-size: 2.75rem;
-margin-bottom: 0.5rem;
-}
-
-.subtitle {
-font-size: 1.25rem;
-color: #9ca3af;
-}
-
-.grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-gap: 1rem;
-padding: 1rem;
-}
-
-.card {
-background-color: rgba(31, 31, 46, 0.9);
-border-radius: 0.75rem;
-padding: 1rem;
-display: flex;
-flex-direction: column;
-height: 100%;
-border: 1px solid #333;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-transform: scale(1.05);
-box-shadow: 0 0 15px 2px rgba(255, 99, 255, 0.5);
-}
-
-.card-image {
-background-color: #000;
-border-radius: 0.5rem;
-height: 200px;
-overflow: hidden;
-margin-bottom: 1rem;
-}
-
-.card-image img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-}
-
-.card-content {
-flex-grow: 1;
-}
-
-.card-title {
-font-size: 1.25rem;
-font-weight: 500;
-margin-bottom: 0.25rem;
-}
-
-.card-version {
-color: #9ca3af;
-font-size: 0.875rem;
-margin-bottom: 0.75rem;
-}
-
-.card-description {
-color: #d1d5db;
-font-size: 0.875rem;
-margin-bottom: 1rem;
-}
-
-.install-button {
-width: 100%;
-background-color: rebeccapurple;
-color: white;
-border: none;
-border-radius: 0.375rem;
-padding: 0.5rem 1rem;
-cursor: pointer;
-transition: background-color 0.2s;
-}
-
-.install-button:hover {
-background-color: #663399;
-}
-
-@media (max-width: 768px) {
-.grid {
-grid-template-columns: 1fr;
-}
-.nav-container a {
-margin-right: 20px;
-}
-.logo-container {
-margin-left: 20px;
-}
-}
-        /* Previous styles remain the same */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: #000000;
+            display: none;
+        }
+
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: none;
+        }
+
+        .swirl-theme-interface {
+            background-color: rgba(31, 31, 46, 0.95);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+        }
+
+            .swirl-theme-interface h3 {
+                margin-bottom: 1rem;
+                color: white;
+            }
+
+        .color-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .color-option {
+            background-color: #2d2d3d;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            border: 1px solid #444;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+            .color-option:hover {
+                transform: scale(1.05);
+            }
+
+        .color-red {
+            background-color: #ff0000;
+        }
+
+        .color-purple {
+            background-color: #800080;
+        }
+
+        .color-gold {
+            background-color: #ffd700;
+        }
+
+        .color-blue {
+            background-color: #0000ff;
+        }
+
+        .color-green {
+            background-color: #008000;
+        }
+
+        .color-black {
+            background-color: #000000;
+        }
+
+        .custom-theme-interface {
+            background-color: rgba(31, 31, 46, 0.95);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+        }
+
+            .custom-theme-interface h3 {
+                margin-bottom: 1rem;
+                color: white;
+            }
+
+        .custom-theme-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+            .control-group label {
+                min-width: 120px;
+                color: white;
+            }
+
+        .custom-theme-interface input[type="color"] {
+            width: 60px;
+            height: 30px;
+            padding: 0;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .custom-theme-interface input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-btn {
+            background-color: #2d2d3d;
+            color: white;
+            padding: 0.5rem 0.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            border: 1px solid #444;
+        }
+
+        .apply-custom-theme {
+            background-color: rebeccapurple;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+            .apply-custom-theme:hover {
+                background-color: #663399;
+            }
+
+        .selected-file-name {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-left: 1rem;
         }
 
         body {
@@ -230,92 +190,379 @@ margin-left: 20px;
             padding: 10px 20px;
             border-bottom: none;
             transition: background-color 0.5s ease;
+            z-index: 1;
+            position: relative;
         }
 
-        /* ... (rest of the previous styles) ... */
-
-        /* New styles for custom theme interface */
-        .custom-theme-interface {
-            background-color: rgba(31, 31, 46, 0.95);
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        .custom-theme-interface h3 {
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .custom-theme-controls {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .control-group {
+        .logo-container {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            margin-left: 30px;
         }
 
-        .control-group label {
-            min-width: 120px;
+        .logo-img {
+            width: 30px;
+            height: auto;
+            margin-right: 10px;
         }
 
-        .custom-theme-interface input[type="color"] {
-            width: 60px;
-            height: 30px;
-            padding: 0;
-            border: none;
-            border-radius: 4px;
-        }
-
-        .custom-theme-interface input[type="file"] {
-            display: none;
-        }
-
-        .file-upload-btn {
-            background-color: #2d2d3d;
+        #logo-text {
+            margin: 0;
+            font-size: 2rem;
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            border: 1px solid #444;
+            text-align: left;
         }
 
-        .apply-custom-theme {
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+
+            .nav-container a {
+                margin-right: 50px;
+                font-size: 1.2rem;
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                .nav-container a:hover {
+                    color: purple;
+                }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .marketplace-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+            .marketplace-header h1 {
+                font-size: 2.75rem;
+                margin-bottom: 0.5rem;
+            }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #9ca3af;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(250px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .card {
+            background-color: rgba(31, 31, 46, 0.9);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 15px 2px rgba(255, 99, 255, 0.5);
+            }
+
+        .card-image {
+            background-color: #000;
+            border-radius: 0.5rem;
+            height: 200px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+            .card-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .card-content {
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .card-version {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-description {
+            color: #d1d5db;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .install-button {
+            width: 100%;
             background-color: rebeccapurple;
             color: white;
             border: none;
             border-radius: 0.375rem;
             padding: 0.5rem 1rem;
             cursor: pointer;
-            margin-top: 1rem;
+            transition: background-color 0.2s;
+        }
+
+            .install-button:hover {
+                background-color: #663399;
+            }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container a {
+                margin-right: 20px;
+            }
+
+            .logo-container {
+                margin-left: 20px;
+            }
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            z-index: 1; /* Changed from -1 to 1 to appear above background */
+            pointer-events: none; /* Allows clicking through the snow */
+            background-color: transparent; /* Changed from #000000 to transparent */
         }
 
-        .apply-custom-theme:hover {
-            background-color: #663399;
+        /* Update header z-index to appear above particles */
+        header {
+            width: 100%;
+            background-color: rebeccapurple;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            border-bottom: none;
+            transition: background-color 0.5s ease;
+            z-index: 2; /* Changed from 1 to 2 to appear above particles */
+            position: relative;
         }
 
-        .selected-file-name {
-            font-size: 0.875rem;
-            color: #9ca3af;
-            margin-left: 1rem;
+        /* Update container z-index to appear above particles */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2; /* Changed from 1 to 2 to appear above particles */
         }
     </style>
+    <script>
+        // Function to initialize snow effect
+        function initSnowEffect() {
+            const particleContainer = document.getElementById('particles-js');
+            if (!particleContainer) {
+                // Create particles-js container if it doesn't exist
+                const container = document.createElement('div');
+                container.id = 'particles-js';
+                document.body.appendChild(container);
+            }
+
+            particleContainer.style.display = 'block';
+            particleContainer.style.backgroundColor = 'transparent';
+
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 100,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: "#ffffff"
+                    },
+                    shape: {
+                        type: "circle",
+                    },
+                    opacity: {
+                        value: 0.7,
+                        random: false,
+                    },
+                    size: {
+                        value: 4,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 2,
+                            size_min: 1,
+                            sync: false
+                        }
+                    },
+                    line_linked: {
+                        enable: false,
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "bottom",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false,
+                        attract: {
+                            enable: false,
+                            rotateX: 600,
+                            rotateY: 1200
+                        }
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "bubble"
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: "repulse"
+                        },
+                        resize: true
+                    },
+                    modes: {
+                        bubble: {
+                            distance: 200,
+                            size: 6,
+                            duration: 0.3,
+                            opacity: 1,
+                            speed: 3
+                        },
+                        repulse: {
+                            distance: 200,
+                            duration: 0.4
+                        }
+                    }
+                },
+                retina_detect: true
+            });
+        }
+
+        // Function to check and load theme
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('v0rt3x-theme');
+            if (savedTheme) {
+                const themeSettings = JSON.parse(savedTheme);
+
+                if (themeSettings.themeName === "Christmas Theme") {
+                    // Apply background and header color
+                    if (themeSettings.background === 'none') {
+                        document.body.style.backgroundImage = 'none';
+                        document.body.style.backgroundColor = '#000000';
+                    } else {
+                        document.body.style.backgroundImage = `url('${themeSettings.background}')`;
+                    }
+
+                    const header = document.querySelector('header');
+                    if (header) {
+                        header.style.backgroundColor = themeSettings.headerColor;
+                    }
+
+                    // Initialize snow effect
+                    initSnowEffect();
+                }
+            }
+        }
+
+        // Add required CSS
+        const snowStyles = document.createElement('style');
+        snowStyles.textContent = `
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            background-color: transparent;
+        }
+
+        header {
+            z-index: 2;
+            position: relative;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+`;
+        document.head.appendChild(snowStyles);
+
+        // Load theme when DOM is ready
+        document.addEventListener('DOMContentLoaded', loadSavedTheme);
+    </script>
+    <script>
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('v0rt3x-theme');
+            if (savedTheme) {
+                const themeSettings = JSON.parse(savedTheme);
+
+                if (themeSettings.themeName === "Matrix Theme") {
+                    document.body.style.backgroundImage = 'none';
+                    document.body.style.backgroundColor = '#000000';
+                    document.querySelector('header').style.backgroundColor = '#003300';
+
+                    const matrixCanvas = document.getElementById('matrix-canvas');
+                    if (matrixCanvas) {
+                        matrixCanvas.style.display = 'block';
+                        if (matrixCanvas.dataset.animationId) {
+                            cancelAnimationFrame(parseInt(matrixCanvas.dataset.animationId));
+                        }
+                        // Make sure your matrix initialization function is available and uses this color
+                        initMatrix(themeSettings.matrixColor || '#00FF00');
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadSavedTheme);
+    </script>
 </head>
 <body>
-    <!-- Previous header and container structure remains the same -->
+    <div id="particles-js"></div>
+    <canvas id="matrix-canvas" style="position: fixed; top: 0; left: 0; z-index: -1; display: none;"></canvas>
     <header>
         <div class="logo-container">
             <a href="index.html"><img src="assets/logo.png" alt="Logo" class="logo-img"></a>
-            <h1 id="logo-text">v0rt3X</h1>  
+            <h1 id="logo-text">v0rt3X</h1>
         </div>
         <div class="nav-container">
             <a href="g.html">Games</a>
-            <a href="2p.html">Two Players</a>  
+            <a href="2p.html">Two Players</a>
             <a href="a.html">Apps</a>
             <a href="p.html">Proxy</a>
         </div>
@@ -330,7 +577,12 @@ margin-left: 20px;
         <div class="grid" id="extensions-grid"></div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        document.getElementById('logo-text').addEventListener('click', function () {
+            window.location.href = ('index.html')
+        });
+
         const themes = {
             standard: {
                 name: "Standard Theme",
@@ -338,7 +590,226 @@ margin-left: 20px;
                 description: "The standard v0rt3X theme.",
                 background: 'assets/background.jpg',
                 headerColor: 'rebeccapurple',
-                icon: "assets/theme.png"
+                icon: "assets/theme.png",
+                type: "main"
+            },
+            particle: {
+                name: "Particle Theme",
+                version: "v1.0.0",
+                description: "An interactive particle background theme with sleek black header. Move your mouse to interact with particles!",
+                background: 'none',
+                headerColor: 'black',
+                icon: "assets/theme4.png",
+                type: "main",
+                customInit: function (color = '#4B0082') {
+                    const particleContainer = document.getElementById('particles-js');
+                    particleContainer.style.display = 'block';
+
+                    particlesJS('particles-js', {
+                        particles: {
+                            number: { value: 150, density: { enable: true, value_area: 800 } },
+                            color: { value: color },
+                            shape: {
+                                type: 'circle',
+                                stroke: { width: 0, color: '#000000' }
+                            },
+                            opacity: { value: 1, random: false },
+                            size: { value: 4, random: true },
+                            move: {
+                                enable: true,
+                                speed: 1.6,
+                                direction: 'top',
+                                random: false,
+                                straight: false,
+                                out_mode: 'out'
+                            },
+                            line_linked: {
+                                enable: true,
+                                distance: 145,
+                                color: color,
+                                opacity: 1,
+                                width: 2
+                            }
+                        },
+                        interactivity: {
+                            detect_on: 'window',
+                            events: {
+                                onhover: { enable: true, mode: 'grab' },
+                                onclick: { enable: true, mode: 'push' }
+                            },
+                            modes: {
+                                repulse: { distance: 100, duration: 0.25 },
+                                grab: { distance: 155 },
+                                push: { particles_nb: 4 }
+                            }
+                        },
+                        retina_detect: true,
+                        fps_limit: 60
+                    });
+                }
+            },
+            matrix: {
+                name: "Matrix Theme",
+                version: "v1.0.0",
+                description: "Enter the Matrix with this cyberpunk-inspired digital rain theme. Customize the color of the digital rain!",
+                background: 'none',
+                headerColor: '#003300',
+                icon: "assets/matrix.png",
+                type: "main",
+                customInit: function (color = '#00FF00') {
+                    const canvas = document.getElementById('matrix-canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    function resizeCanvas() {
+                        canvas.width = window.innerWidth;
+                        canvas.height = window.innerHeight;
+                    }
+                    resizeCanvas();
+                    window.addEventListener('resize', resizeCanvas);
+
+                    const matrix = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+                    const characters = matrix.split("");
+
+                    const fontSize = 20;
+                    const columns = canvas.width / fontSize;
+                    const drops = [];
+
+                    for (let x = 0; x < columns; x++) {
+                        drops[x] = 1;
+                    }
+
+                    function draw() {
+
+
+                        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                        ctx.fillStyle = color;
+                        ctx.font = fontSize + "px monospace";
+
+                        for (let i = 0; i < drops.length; i++) {
+                            const text = characters[Math.floor(Math.random() * characters.length)];
+                            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                                drops[i] = 0;
+                            }
+
+                            drops[i]++;
+                        }
+                    }
+
+                    let animationId;
+                    function animate() {
+                        animationId = requestAnimationFrame(animate);
+                        draw();
+                    }
+
+                    animate();
+                    canvas.dataset.animationId = animationId;
+                }
+            },
+            synthwave: {
+                name: "Synthwave Theme",
+                version: "v1.0.0",
+                description: "A retro-futuristic synthwave theme with animated grid and neon mountains.",
+                background: 'assets/sythwave.gif',
+                headerColor: '#ff1493',
+                icon: "assets/syth.png",
+                type: "main",
+            },
+            christmas: {
+                name: "Christmas Theme",
+                version: "v1.0.0",
+                description: "A festive theme with gently falling snow particles!",
+                background: 'assets/snow.png',
+                headerColor: '#004AAD',
+                icon: "assets/christmas.png",
+                type: "main",
+                customInit: function () {
+                    const particleContainer = document.getElementById('particles-js');
+                    particleContainer.style.display = 'block';
+
+                    particlesJS('particles-js', {
+                        particles: {
+                            number: {
+                                value: 200,
+                                density: {
+                                    enable: true,
+                                    value_area: 800
+                                }
+                            },
+                            color: {
+                                value: "#ffffff"
+                            },
+                            shape: {
+                                type: "circle",
+                            },
+                            opacity: {
+                                value: 1,
+                                random: false,
+                            },
+                            size: {
+                                value: 4,
+                                random: true,
+                            },
+                            line_linked: {
+                                enable: false,
+                            },
+                            move: {
+                                enable: true,
+                                speed: 2,
+                                direction: "bottom",
+                                random: true,
+                                straight: false,
+                                out_mode: "out",
+                                bounce: false,
+                            }
+                        },
+                        interactivity: {
+                            detect_on: "canvas",
+                            events: {
+                                onhover: {
+                                    enable: true,
+                                    mode: "repulse"
+                                },
+                                onclick: {
+                                    enable: true,
+                                    mode: "push"
+                                },
+                                resize: true
+                            },
+                            modes: {
+                                repulse: {
+                                    distance: 100,
+                                    duration: 0.4
+                                },
+                                push: {
+                                    particles_nb: 4
+                                }
+                            }
+                        },
+                        retina_detect: true
+                    });
+                }
+            },
+            Halloweenn: {
+                name: "Halloween Theme",
+                version: "v1.0.0",
+                description: "A spooky halloween theme.",
+                background: 'assets/hall.png',
+                headerColor: '#000000',
+                icon: "assets/halloween.png",
+                type: "main",
+            },
+            swirl: {
+                name: "Swirl Theme",
+                version: "v1.0.0",
+                description: "Choose from a variety of swirl patterns with matching header colors.",
+                icon: "assets/theme-3.png",
+                headerColor: 'rebeccapurple',
+                background: 'assets/background.jpg',
+                type: "main"
             },
             og: {
                 name: "OG Theme",
@@ -346,140 +817,422 @@ margin-left: 20px;
                 description: "The original v0rt3X theme.",
                 background: 'assets/og-theme.jpg',
                 headerColor: '#1a1a1a',
-                icon: "assets/theme-2.png"
+                icon: "assets/theme-2.png",
+                type: "main"
             },
             custom: {
                 name: "Custom Theme",
-                version: "v1.0.0",
+                version: "v2.0.0",
                 description: "Create your own custom theme with personalized colors and background.",
                 icon: "assets/theme.png",
                 headerColor: 'rebeccapurple',
-                background: 'assets/background.jpg'
+                type: "main"
             }
         };
 
-        function applyTheme(theme) {
-            if (!theme) return;
-
-            document.body.style.backgroundImage = `url('${theme.background}')`; 
-            document.querySelector('header').style.backgroundColor = theme.headerColor;
-
-            localStorage.setItem('v0rt3x-theme', JSON.stringify({
-                background: theme.background,
-                headerColor: theme.headerColor
-            }));
-
-            localStorage.setItem('v0rt3x-theme-name', theme.name);
-            localStorage.setItem('v0rt3x-theme-version', theme.version);
+        function createMatrixThemeInterface() {
+            const interfaceDiv = document.createElement('div');
+            interfaceDiv.className = 'custom-theme-interface';
+            interfaceDiv.innerHTML = `
+<h3>Customize Matrix Theme</h3>
+<div class="custom-theme-controls">
+            <div class="control-group">
+                <label>Matrix Color:</label>
+                <input type="color" id="matrixColor" value="#00FF00">
+            </div>
+            <button class="apply-custom-theme" onclick="applyMatrixTheme()">Apply Theme</button>
+</div>
+                    `;
+            return interfaceDiv;
         }
 
-        function createCustomThemeInterface(card) {
-            const interface = document.createElement('div');
-            interface.className = 'custom-theme-interface';
-            
-            interface.innerHTML = `
-                <h3>Customize Your Theme</h3>
-                <div class="custom-theme-controls">
-                    <div class="control-group">
-                        <label>Header Color:</label>
-                        <input type="color" id="headerColorPicker" value="#663399">
-                    </div>
-                    <div class="control-group">
-                        <label>Background:</label>
-                        <input type="file" id="backgroundInput" accept="image/*">
-                        <label for="backgroundInput" class="file-upload-btn">Choose File</label>
-                        <span class="selected-file-name"></span>
-                    </div>
-                </div>
-                <button class="apply-custom-theme">Apply Theme</button>
-            `;
+        function applyMatrixTheme() {
+            const color = document.getElementById('matrixColor').value;
+            document.body.style.backgroundImage = 'none';
+            document.body.style.backgroundColor = '#000000';
+            document.querySelector('header').style.backgroundColor = '#000000';
 
-            const colorPicker = interface.querySelector('#headerColorPicker');
-            const fileInput = interface.querySelector('#backgroundInput');
-            const fileNameDisplay = interface.querySelector('.selected-file-name');
-            const applyButton = interface.querySelector('.apply-custom-theme');
+            const particleContainer = document.getElementById('particles-js');
+            const matrixCanvas = document.getElementById('matrix-canvas');
 
-            let selectedBackground = null;
-
-            fileInput.addEventListener('change', function(e) {
-                if (e.target.files && e.target.files[0]) {
-                    const file = e.target.files[0];
-                    fileNameDisplay.textContent = file.name;
-                    selectedBackground = URL.createObjectURL(file);
+            if (particleContainer) {
+                particleContainer.style.display = 'none';
+            }
+            if (matrixCanvas) {
+                matrixCanvas.style.display = 'block';
+                if (matrixCanvas.dataset.animationId) {
+                    cancelAnimationFrame(parseInt(matrixCanvas.dataset.animationId));
                 }
-            });
+                themes.matrix.customInit(color);
+            }
 
-            applyButton.addEventListener('click', function() {
-                const customTheme = {
-                    name: "Custom Theme",
-                    version: "v1.0.0",
-                    headerColor: colorPicker.value,
-                    background: selectedBackground || themes.standard.background
-                };
-
-                applyTheme(customTheme);
-                card.removeChild(interface);
-                alert('Custom theme applied successfully!');
-            });
-
-            return interface;
+            const themeSettings = {
+                themeName: "Matrix Theme",
+                background: 'none',
+                headerColor: '#000000',
+                matrixColor: color
+            };
+            localStorage.setItem('v0rt3x-theme', JSON.stringify(themeSettings));
         }
 
-        function createThemeCard(themeKey, theme) {
+        function createParticleThemeInterface() {
+            const interfaceDiv = document.createElement('div');
+            interfaceDiv.className = 'custom-theme-interface';
+            interfaceDiv.innerHTML = `
+<h3>Customize Particle Theme</h3>
+<div class="custom-theme-controls">
+            <div class="control-group">
+                <label>Particle Color:</label>
+                <input type="color" id="particleColor" value="#4B0082">
+            </div>
+            <button class="apply-custom-theme" onclick="applyParticleTheme()">Apply Theme</button>
+</div>
+                    `;
+            return interfaceDiv;
+        }
+
+        function createSwirlThemeInterface() {
+            const interfaceDiv = document.createElement('div');
+            interfaceDiv.className = 'swirl-theme-interface';
+            interfaceDiv.innerHTML = `
+<h3>Choose Swirl Color</h3>
+<div class="color-options">
+            <div class="color-option color-red" onclick="applySwirlTheme('red', '#ff0000')">Red</div>
+            <div class="color-option color-purple" onclick="applySwirlTheme('purple', '#800080')">Purple</div>
+            <div class="color-option color-gold" onclick="applySwirlTheme('gold', '#ffd700')">Gold</div>
+            <div class="color-option color-blue" onclick="applySwirlTheme('blue', '#0000ff')">Blue</div>
+            <div class="color-option color-green" onclick="applySwirlTheme('green', '#008000')">Green</div>
+            <div class="color-option color-black" onclick="applySwirlTheme('black', '#000000')">Black</div>
+</div>
+                    `;
+            return interfaceDiv;
+        }
+
+        function createCustomThemeInterface() {
+            const interfaceDiv = document.createElement('div');
+            interfaceDiv.className = 'custom-theme-interface';
+            interfaceDiv.innerHTML = `
+<h3>Customize Theme</h3>
+<div class="custom-theme-controls">
+            <div class="control-group">
+                <label>Header Color:</label>
+                <input type="color" id="headerColor" value="#663399">
+            </div>
+            <div class="control-group">
+                <label>Background:</label>
+                <label class="file-upload-btn" for="backgroundFile">
+                    Choose File
+                </label>
+                <input type="file" id="backgroundFile" accept="image/*">
+            </div>
+            <button class="apply-custom-theme" onclick="applyCustomTheme()">Apply Theme</button>
+</div>
+                    `;
+            return interfaceDiv;
+        }
+
+        function createThemeCard(theme) {
             const card = document.createElement('div');
             card.className = 'card';
 
             card.innerHTML = `
-                <div class="card-image">
-                    <img src="${theme.icon}" alt="${theme.name}">
-                </div>
-                <div class="card-content">
-                    <h2 class="card-title">${theme.name}</h2>
-                    <p class="card-version">${theme.version}</p>
-                    <p class="card-description">${theme.description}</p>
-                </div>
-                <button class="install-button">Install</button>
-            `;
+<div class="card-image">
+            <img src="${theme.icon}" alt="${theme.name}">
+</div>
+<div class="card-content">
+            <h2 class="card-title">${theme.name}</h2>
+            <div class="card-version">${theme.version}</div>
+            <p class="card-description">${theme.description}</p>
+            <button class="install-button">Install</button>
+</div>
+                    `;
 
             const installButton = card.querySelector('.install-button');
-            installButton.addEventListener('click', function() {
-                if (themeKey === 'custom') {
-                    const existingInterface = card.querySelector('.custom-theme-interface');
-                    if (existingInterface) {
-                        card.removeChild(existingInterface);
-                    } else {
-                        const interface = createCustomThemeInterface(card);
-                        card.appendChild(interface);
-                    }
+            installButton.addEventListener('click', () => {
+                const existingInterface = document.querySelector('.custom-theme-interface, .swirl-theme-interface');
+                if (existingInterface) {
+                    existingInterface.remove();
+                }
+
+                if (theme.name === "Custom Theme") {
+                    card.appendChild(createCustomThemeInterface());
+                } else if (theme.name === "Swirl Theme") {
+                    card.appendChild(createSwirlThemeInterface());
+                } else if (theme.name === "Particle Theme") {
+                    card.appendChild(createParticleThemeInterface());
+                } else if (theme.name === "Matrix Theme") {
+                    card.appendChild(createMatrixThemeInterface());
                 } else {
                     applyTheme(theme);
-                    alert(`Installing ${theme.name}... Theme will be applied to all pages.`);
                 }
             });
 
             return card;
         }
 
-        function initializeMarketplace() {
-            const grid = document.getElementById('extensions-grid');
+        function initializeParticles(color) {
+            if (window.particlesJS) {
+                themes.particle.customInit(color);
+            }
+        }
 
-            for (const [key, theme] of Object.entries(themes)) {
-                const card = createThemeCard(key, theme);
-                grid.appendChild(card);
+        function applySwirlTheme(color, headerColor) {
+            document.body.style.backgroundImage = `url('assets/swirl/${color}.jpg')`;
+            document.querySelector('header').style.backgroundColor = headerColor;
+
+            const particleContainer = document.getElementById('particles-js');
+            const matrixCanvas = document.getElementById('matrix-canvas');
+            if (particleContainer) {
+                particleContainer.style.display = 'none';
+            }
+            if (matrixCanvas) {
+                matrixCanvas.style.display = 'none';
+                if (matrixCanvas.dataset.animationId) {
+                    cancelAnimationFrame(parseInt(matrixCanvas.dataset.animationId));
+                }
             }
 
+            const themeSettings = {
+                themeName: "Swirl Theme",
+                background: `assets/swirl/${color}.jpg`,
+                headerColor: headerColor
+            };
+            localStorage.setItem('v0rt3x-theme', JSON.stringify(themeSettings));
+        }
+
+        function applyParticleTheme() {
+            const color = document.getElementById('particleColor').value;
+            document.body.style.backgroundImage = 'none';
+            document.body.style.backgroundColor = '#000000';
+            document.querySelector('header').style.backgroundColor = '#000000';
+
+            const particleContainer = document.getElementById('particles-js');
+            const matrixCanvas = document.getElementById('matrix-canvas');
+            if (particleContainer) {
+                particleContainer.style.display = 'block';
+                initializeParticles(color);
+            }
+            if (matrixCanvas) {
+                matrixCanvas.style.display = 'none';
+                if (matrixCanvas.dataset.animationId) {
+                    cancelAnimationFrame(parseInt(matrixCanvas.dataset.animationId));
+                }
+            }
+
+            const themeSettings = {
+                themeName: "Particle Theme",
+                background: 'none',
+                headerColor: '#000000',
+                particleColor: color
+            };
+            localStorage.setItem('v0rt3x-theme', JSON.stringify(themeSettings));
+        }
+
+        function applyCustomTheme() {
+            const headerColor = document.getElementById('headerColor').value;
+            const backgroundFile = document.getElementById('backgroundFile').files[0];
+
+            const particleContainer = document.getElementById('particles-js');
+            const matrixCanvas = document.getElementById('matrix-canvas');
+            if (particleContainer) {
+                particleContainer.style.display = 'none';
+            }
+            if (matrixCanvas) {
+                matrixCanvas.style.display = 'none';
+                if (matrixCanvas.dataset.animationId) {
+                    cancelAnimationFrame(parseInt(matrixCanvas.dataset.animationId));
+                }
+            }
+
+            document.querySelector('header').style.backgroundColor = headerColor;
+
+            if (backgroundFile) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.body.style.backgroundImage = `url('${e.target.result}')`;
+
+                    const themeSettings = {
+                        themeName: "Custom Theme",
+                        background: e.target.result,
+                        headerColor: headerColor
+                    };
+                    localStorage.setItem('v0rt3x-theme', JSON.stringify(themeSettings));
+                };
+                reader.readAsDataURL(backgroundFile);
+            }
+        }
+
+        function applyTheme(theme) {
+            const particleContainer = document.getElementById('particles-js');
+            const matrixCanvas = document.getElementById('matrix-canvas');
+
+            // Reset all special effects first
+            if (particleContainer) {
+                particleContainer.style.display = 'none';
+            }
+            if (matrixCanvas) {
+                matrixCanvas.style.display = 'none';
+                if (matrixCanvas.dataset.animationId) {
+                    cancelAnimationFrame(parseInt(matrixCanvas.dataset.animationId));
+                }
+            }
+
+            // Apply background
+            if (theme.background === 'none') {
+                document.body.style.backgroundImage = 'none';
+                document.body.style.backgroundColor = '#000000';
+            } else {
+                document.body.style.backgroundImage = `url('${theme.background}')`;
+            }
+
+            // Apply header color
+            document.querySelector('header').style.backgroundColor = theme.headerColor;
+
+            // Apply theme-specific effects
+            if (theme.name === "Christmas Theme") {
+                if (particleContainer) {
+                    particleContainer.style.backgroundColor = 'transparent';
+                    theme.customInit();
+                }
+            } else if (theme.name === "Particle Theme") {
+                if (particleContainer) {
+                    particleContainer.style.backgroundColor = '#000000';
+                    particleContainer.style.display = 'block';
+                    initializeParticles(theme.particleColor || '#4B0082');
+                }
+            } else if (theme.name === "Matrix Theme") {
+                if (matrixCanvas) {
+                    matrixCanvas.style.display = 'block';
+                    theme.customInit(theme.matrixColor || '#00FF00');
+                }
+            }
+
+            // Save theme settings
+            const themeSettings = {
+                themeName: theme.name,
+                background: theme.background,
+                headerColor: theme.headerColor,
+                particleColor: theme.particleColor,
+                matrixColor: theme.matrixColor
+            };
+            localStorage.setItem('v0rt3x-theme', JSON.stringify(themeSettings));
+        }
+
+        function loadSavedTheme() {
             const savedTheme = localStorage.getItem('v0rt3x-theme');
             if (savedTheme) {
-                const theme = JSON.parse(savedTheme);
-                document.body.style.backgroundImage = `url('${theme.background}')`;
-                const header = document.querySelector('header');
-                if (header) {
-                    header.style.backgroundColor = theme.headerColor;
+                const themeSettings = JSON.parse(savedTheme);
+
+                if (themeSettings.themeName === "Matrix Theme") {
+                    document.body.style.backgroundImage = 'none';
+                    document.body.style.backgroundColor = '#000000';
+                    document.querySelector('header').style.backgroundColor = '#003300';
+
+                    const matrixCanvas = document.getElementById('matrix-canvas');
+                    if (matrixCanvas) {
+                        matrixCanvas.style.display = 'block';
+                        if (matrixCanvas.dataset.animationId) {
+                            cancelAnimationFrame(parseInt(matrixCanvas.dataset.animationId));
+                        }
+                        themes.matrix.customInit(themeSettings.matrixColor || '#00FF00');
+                    }
+                } else {
+                    if (themeSettings.background === 'none') {
+                        document.body.style.backgroundImage = 'none';
+                        document.body.style.backgroundColor = '#000000';
+                    } else {
+                        document.body.style.backgroundImage = `url('${themeSettings.background}')`;
+                    }
+                    document.querySelector('header').style.backgroundColor = themeSettings.headerColor;
+
+                    if (themeSettings.themeName === "Particle Theme") {
+                        const particleContainer = document.getElementById('particles-js');
+                        if (particleContainer) {
+                            particleContainer.style.display = 'block';
+                            initializeParticles(themeSettings.particleColor || '#4B0082');
+                        }
+                    }
                 }
             }
         }
 
-        document.addEventListener('DOMContentLoaded', initializeMarketplace);
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('extensions-grid');
+
+            document.addEventListener('change', (e) => {
+                if (e.target.id === 'backgroundFile') {
+                    const fileName = e.target.files[0]?.name || 'No file chosen';
+                    const selectedFileName = document.querySelector('.selected-file-name');
+                    if (selectedFileName) {
+                        selectedFileName.textContent = fileName;
+                    }
+                }
+            });
+
+            Object.values(themes).forEach(theme => {
+                if (theme.type === "main") {
+                    grid.appendChild(createThemeCard(theme));
+                }
+            });
+
+            loadSavedTheme();
+        });
     </script>
+    <script>
+        function initMatrix(color) {
+            const canvas = document.getElementById('matrix-canvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()";
+            const charSize = 20;
+            const columns = canvas.width / charSize;
+            const drops = new Array(Math.floor(columns)).fill(1);
+
+            let frameCount = 0;
+
+            function draw() {
+                frameCount++;
+
+                // Only update every 4 frames
+                if (frameCount % 4 === 0) {
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    ctx.fillStyle = color;
+                    ctx.font = `${charSize}px monospace`;
+
+                    for (let i = 0; i < drops.length; i++) {
+                        const text = chars[Math.floor(Math.random() * chars.length)];
+                        ctx.fillText(text, i * charSize, drops[i] * charSize);
+
+                        if (drops[i] * charSize > canvas.height && Math.random() > 0.99) {
+                            drops[i] = 0;
+                        }
+                        drops[i]++;
+                    }
+                }
+
+                canvas.dataset.animationId = requestAnimationFrame(draw);
+            }
+
+            draw();
+        }
+
+        // Keep the window resize handler
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('matrix-canvas');
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        });
+    </script>
+    <!-- Add these elements right after the opening <body> tag -->
+    <div id="particles-js"></div>
+    <canvas id="matrix-canvas" style="position: fixed; top: 0; left: 0; z-index: -1; display: none;"></canvas>
 </body>
-</html>
+</html >

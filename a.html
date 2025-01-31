@@ -1,352 +1,762 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>v0rt3X | Apps</title>
-        <link rel="shortcut icon" href="assets/logo2.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v0rt3X | Apps</title>
+    <link rel="shortcut icon" href="assets/logo2.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome link for the gear icon -->
-            <script>
-        // Theme loader - add this to every page
+    <script>
         function loadSavedTheme() {
             const savedTheme = localStorage.getItem('v0rt3x-theme');
             if (savedTheme) {
                 const theme = JSON.parse(savedTheme);
-                document.body.style.backgroundImage = `url('${theme.background}')`;
+
+                // Handle background
+                if (theme.background === 'none') {
+                    document.body.style.backgroundImage = 'none';
+                    document.body.style.backgroundColor = '#000000';
+                } else {
+                    document.body.style.backgroundImage = `url('${theme.background}')`;
+                }
+
+                // Handle header color
                 const header = document.querySelector('header');
                 if (header) {
                     header.style.backgroundColor = theme.headerColor;
                 }
+
+                // Handle particles
+                const particleContainer = document.getElementById('particles-js');
+                if (particleContainer) {
+                    if (theme.themeName === "Particle Theme") {
+                        particleContainer.style.display = 'block';
+                        // Initialize particles if the script is loaded
+                        if (window.particlesJS) {
+                            initializeParticles();
+                        }
+                    } else {
+                        particleContainer.style.display = 'none';
+                    }
+                }
             }
         }
-        
-        // Load theme as soon as possible
+
+        // Run on page load
         document.addEventListener('DOMContentLoaded', loadSavedTheme);
-        // Also try to load immediately in case DOMContentLoaded already fired
+        // Also run immediately in case DOM is already loaded
         loadSavedTheme();
     </script>
+    <!-- Add this style block to your existing CSS -->
     <style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-}
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: #000000;
+            display: none;
+        }
+    </style>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
 
-/* Header styles */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    padding: 10px 20px;
-    color: white;
-}
+        /* Header styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+            color: white;
+        }
 
-.logo-container {
-  display: flex; /* Flexbox for horizontal alignment */
-  align-items: center; /* Align vertically centered */
-  margin-left: 50px; /* Move Skibidi 50px from the edge */
-}
+        .logo-container {
+            display: flex; /* Flexbox for horizontal alignment */
+            align-items: center; /* Align vertically centered */
+            margin-left: 50px; /* Move Skibidi 50px from the edge */
+        }
 
-/* Logo image styling */
-.logo-img {
-  width: 30px; /* Increase the width of the logo */
-  height: auto; /* Maintain aspect ratio */
-  margin-right: 10px; /* Space between logo and text */
-}
+        /* Logo image styling */
+        .logo-img {
+            width: 30px; /* Increase the width of the logo */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 10px; /* Space between logo and text */
+        }
 
-#logo-text {
-  margin: 0; /* Remove default margin from the h1 */
-  font-size: 2rem; /* Ensure the text is large and centered */
-  color: white;
-  text-align: left;
-}
-/* Navigation container (for the Two Players and Games text) */
-.nav-container {
-    display: flex;
-    align-items: center;
-}
+        #logo-text {
+            margin: 0; /* Remove default margin from the h1 */
+            font-size: 2rem; /* Ensure the text is large and centered */
+            color: white;
+            text-align: left;
+        }
+        /* Navigation container (for the Two Players and Games text) */
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
 
-/* Styling for the navigation links */
-.nav-container a {
-    margin-right: 50px; /* Move the text 50px from the edge */
-    font-size: 1.2rem;
-    color: white;
-    text-decoration: none;
-}
+            /* Styling for the navigation links */
+            .nav-container a {
+                margin-right: 50px; /* Move the text 50px from the edge */
+                font-size: 1.2rem;
+                color: white;
+                text-decoration: none;
+            }
 
-.nav-container a:hover {
-    color: purple; /* Change color on hover */
-}
+                .nav-container a:hover {
+                    color: purple; /* Change color on hover */
+                }
 
-/* Gear button styling */
-.gear-button {
-    background-color: transparent;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    font-size: 24px;
-    cursor: pointer;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        /* Gear button styling */
+        .gear-button {
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.gear-button:hover {
-    background-color: #444;
-}
+            .gear-button:hover {
+                background-color: #444;
+            }
 
-/* Position the gear button at the bottom left */
-.gear-container {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 1000; /* Ensures the button stays on top */
-}
+        /* Position the gear button at the bottom left */
+        .gear-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000; /* Ensures the button stays on top */
+        }
 
-#file-input {
-    display: none;
-}
+        #file-input {
+            display: none;
+        }
 
-body {
-    transition: background 0.5s ease-in-out;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    margin: 0;
-}
+        body {
+            transition: background 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+        }
 
-body {
-    background-image: url('assets/background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
+        body {
+            background-image: url('assets/background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #121212; 
-    color: #e0e0e0; 
-}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #121212;
+            color: #e0e0e0;
+        }
 
-header {
-    width: 100%;
-    background-color: rebeccapurple; 
-    color: #ffffff;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 24px;
-    font-weight: bold;
-    border-bottom: none;
-}
+        header {
+            width: 100%;
+            background-color: rebeccapurple;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: none;
+        }
 
-.search-container {
-    width: 100%;
-    max-width: 1200px;
-    padding: 20px;
-    text-align: center;
-}
+        .search-container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            text-align: center;
+        }
 
-.search-bar {
-    width: 100%;
-    max-width: 300px;
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: transparent;
-    color: #e0e0e0;
-    border: 1px solid #444;
-    border-radius: 8px;
-    font-size: 16px;
-}
+        .search-bar {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: transparent;
+            color: #e0e0e0;
+            border: 1px solid #444;
+            border-radius: 8px;
+            font-size: 16px;
+        }
 
-.grid-container {
-    display: grid;
-    grid-wrap: wrap;
-    grid-template-columns: repeat(6, 1fr); 
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    width: 100%;
-    overflow: auto; 
-    justify-content: center; 
-}
+        .grid-container {
+            display: grid;
+            grid-wrap: wrap;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            width: 100%;
+            overflow: auto;
+            justify-content: center;
+        }
 
-.grid-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: transparent; 
-    padding: 10px;
-    border: 1px solid #333; 
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
-}
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: transparent;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-.grid-item:hover {
-    transform: scale(1.05); 
-    box-shadow: 0 0 15px 2px rgba(255, 99, 255, 0.5); 
-}
+            .grid-item:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 15px 2px rgba(255, 99, 255, 0.5);
+            }
 
-.image-slot {
-    width: 100px;
-    height: 100px;
-    background-color: transparent; 
-    border-radius: 8px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    transition: transform 0.3s ease; 
-}
+        .image-slot {
+            width: 100px;
+            height: 100px;
+            background-color: transparent;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
 
-.image-slot img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    transition: transform 0.3s ease; 
-}
+            .image-slot img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
 
-.image-slot:hover img {
-    transform: scale(1.1); 
-}
+            .image-slot:hover img {
+                transform: scale(1.1);
+            }
 
-.caption {
-    font-size: 16px;
-    font-weight: bold;
-    color: #e0e0e0; 
-}
+        .caption {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e0e0e0;
+        }
 
-.grid-container::-webkit-scrollbar {
-    display: none;
-}
+        .grid-container::-webkit-scrollbar {
+            display: none;
+        }
 
-.grid-container {
-    -ms-overflow-style: none;
-    scrollbar-width: none; 
-}
+        .grid-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
 
-  </style>
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: none;
+    </style>
+    <script>
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('v0rt3x-theme');
+            if (savedTheme) {
+                const themeSettings = JSON.parse(savedTheme);
+
+                if (themeSettings.themeName === "Matrix Theme") {
+                    document.body.style.backgroundImage = 'none';
+                    document.body.style.backgroundColor = '#000000';
+                    document.querySelector('header').style.backgroundColor = '#003300';
+
+                    const matrixCanvas = document.getElementById('matrix-canvas');
+                    if (matrixCanvas) {
+                        matrixCanvas.style.display = 'block';
+                        if (matrixCanvas.dataset.animationId) {
+                            cancelAnimationFrame(parseInt(matrixCanvas.dataset.animationId));
+                        }
+                        // Make sure your matrix initialization function is available and uses this color
+                        initMatrix(themeSettings.matrixColor || '#00FF00');
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadSavedTheme);
+    </script>
 </head>
 <body>
-  <header>
+    <div id="particles-js"></div>
+    <canvas id="matrix-canvas" style="position: fixed; top: 0; left: 0; z-index: -1; display: none;"></canvas>
+    <header>
         <div class="logo-container">
             <a href="index.html"><img src="assets/logo.png" alt="Logo" class="logo-img"></a>
-            <h1 id="logo-text">v0rt3X</h1>  
+            <h1 id="logo-text">v0rt3X</h1>
         </div>
         <div class="nav-container">
-<a href="g.html">Games</a>
-            <a href="2p.html">Two Players</a>  
-<a href="a.html">Apps</a>
+            <a href="g.html">Games</a>
+            <a href="2p.html">Two Players</a>
+            <a href="a.html">Apps</a>
             <a href="p.html">Proxy</a>
         </div>
     </header>
 
-<div class="search-container">
-<input type="text" class="search-bar" id="searchBar" placeholder="Search for a game..." onkeyup="filterGames()">
-</div>
-<div class="gear-container">
-<button id="gear-button" class="gear-button">
-<i class="fas fa-cog"></i> <!-- FontAwesome gear icon -->
-</button>
-<input type="file" id="file-input" accept="image/*" style="display: none;">
-</div>
+    <div class="search-container">
+        <input type="text" class="search-bar" id="searchBar" placeholder="Search for a game..." onkeyup="filterGames()">
+    </div>
+    <div class="gear-container">
+        <button id="gear-button" class="gear-button">
+            <i class="fas fa-cog"></i> <!-- FontAwesome gear icon -->
+        </button>
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
+    </div>
 
-<script>
-document.addEventListener('keydown', function(event) {
-    // Check if the pressed key is backslash
-    if (event.key === '\\') {
-        // Navigate to l.html
-        window.location.href = 'l.html';
+    <script>
+        document.addEventListener('keydown', function (event) {
+            // Check if the pressed key is backslash
+            if (event.key === '\\') {
+                // Navigate to l.html
+                window.location.href = 'l.html';
+            }
+        });
+
+        document.getElementById('logo-text').addEventListener('click', function () {
+            window.location.href = ('index.html')
+        });
+
+        // Modified gear button click handler to navigate to settings.html
+        document.getElementById('gear-button').addEventListener('click', function () {
+            window.location.href = 'setting.html';
+        });
+
+        // Check if a background image is stored in localStorage when the page loads
+        window.addEventListener('load', function () {
+            const storedBackground = localStorage.getItem('backgroundImage');
+            if (storedBackground) {
+                document.body.style.backgroundImage = 'url(' + storedBackground + ')';
+            }
+        });
+    </script>
+    <div class="grid-container" id="gridContainer">
+        <!-- Dynamically generate a large number of items with different images and names -->
+        <script>
+            const gridContainer = document.querySelector('.grid-container');
+            const searchBar = document.getElementById('searchBar');
+
+            const items = [
+                { name: 'ArtClass', imageUrl: 'https://avatars.githubusercontent.com/u/116205545?s=280&v=4', page: 'a/page1.html' },
+                { name: 'Windows 11', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRy-xRc-qDZN0v9z7k6KHM8Cw1WzuMqnz1s0g&s', page: 'a/page2.html' },
+                { name: 'Chess', imageUrl: 'https://static.wikia.nocookie.net/logopedia/images/4/4a/Chess.com_2019_%28App_Icon%29.png/revision/latest/scale-to-width-down/250?cb=20221006103032', page: 'a/page3.html' },
+                { name: 'Cool Math Games', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwROf_FVSh9WkFeG15X-kVysnKddaMHvxSEA&s', page: 'a/page4.html' },
+                { name: 'Discord', imageUrl: 'https://static.vecteezy.com/system/resources/previews/006/892/625/non_2x/discord-logo-icon-editorial-free-vector.jpg', page: 'a/page5.html' },
+                { name: 'Disney Plus', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf7_ic-h09k9aCvKFSKdYQd6UHM7N96TjcSA&s', page: 'a/page13.html' },
+                { name: 'Github', imageUrl: 'https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_960_720.png', page: 'a/page18.html' },
+                { name: 'GeForce', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsx4PQB6dguKRpeM0xEOtaimEhoGejEYJNqQ&s', page: 'a/page6.html' },
+                { name: 'Google', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDIbudNn2WDl1Lc_jAa_B4bwjPyjIJW-fcoQ&s', page: 'a/page7.html' },
+                { name: 'Ninja.ai', imageUrl: 'https://ipfs.io/ipfs/QmP4s7JqWtTYzP4m8xM4CMcxMeqicRoszoZVpuSu7Jad3c', page: 'a/page8.html' },
+                { name: 'Netflix', imageUrl: 'https://images.ctfassets.net/4cd45et68cgf/Rx83JoRDMkYNlMC9MKzcB/2b14d5a59fc3937afd3f03191e19502d/Netflix-Symbol.png?w=700&h=456', page: 'a/page14.html' },
+                { name: 'Spotify', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmn49U8s0si8AOcPjFxKDmNNaL9HJsgNdulA&s', page: 'a/page9.html' },
+                { name: 'TikTok', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkuJhoBifc904AlWJdNNoIaAwALpBy_yL5tQ&s', page: 'a/page10.html' },
+                { name: 'Poe AI', imageUrl: 'https://www.fahimai.com/wp-content/uploads/2024/06/Untitled-design-11.png', page: 'a/page11.html' },
+                { name: 'YouTube', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCnQbLJZ3rJAv_wLXuHFJKxTO1GKMS0zhf8Q&s', page: 'a/page12.html' },
+                { name: 'Gmail', imageUrl: 'https://static.vecteezy.com/system/resources/previews/022/484/516/non_2x/google-mail-gmail-icon-logo-symbol-free-png.png', page: 'a/page15.html' },
+                { name: 'Gemini', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThr7qrIazsvZwJuw-uZCtLzIjaAyVW_ZrlEQ&s', page: 'a/page17.html' },
+                { name: 'Losmovies', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJer8Wn8tk1C81bFl75xUfcFntSCSSd7XI9Q&s', page: 'a/page16.html' }
+
+            ];
+
+            function filterGames() {
+                const searchTerm = searchBar.value.toLowerCase();
+                const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchTerm));
+                renderGrid(filteredItems);
+            }
+
+            function renderGrid(filteredItems) {
+                gridContainer.innerHTML = '';
+                filteredItems.forEach(item => {
+                    const gridItem = document.createElement('div');
+                    gridItem.className = 'grid-item';
+
+                    const imageSlot = document.createElement('div');
+                    imageSlot.className = 'image-slot';
+
+                    const img = document.createElement('img');
+                    img.src = item.imageUrl;
+                    img.alt = item.name;
+                    imageSlot.appendChild(img);
+
+                    const caption = document.createElement('div');
+                    caption.className = 'caption';
+                    caption.textContent = item.name;
+
+                    gridItem.appendChild(imageSlot);
+                    gridItem.appendChild(caption);
+
+                    gridItem.onclick = () => {
+                        window.open(item.page, '_blank');
+                    };
+
+                    gridContainer.appendChild(gridItem);
+                });
+            }
+
+            renderGrid(items);
+
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+        <!-- Add this in the <head> section of each page, after your other stylesheet links -->
+        <div id="particles-js"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+        <script>
+            function initializeParticles(color = '#4B0082') {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: {
+                            value: 150,
+                            density: {
+                                enable: true,
+                                value_area: 800
+                            }
+                        },
+                        color: {
+                            value: color
+                        },
+                        shape: {
+                            type: 'circle',
+                            stroke: {
+                                width: 0,
+                                color: '#000000'
+                            }
+                        },
+                        opacity: {
+                            value: 1,
+                            random: false
+                        },
+                        size: {
+                            value: 4,
+                            random: true
+                        },
+                        move: {
+                            enable: true,
+                            speed: 1.6,
+                            direction: 'top',
+                            random: false,
+                            straight: false,
+                            out_mode: 'out'
+                        },
+                        line_linked: {
+                            enable: true,
+                            distance: 145,
+                            color: color,
+                            opacity: 1,
+                            width: 2
+                        }
+                    },
+                    interactivity: {
+                        detect_on: 'window',
+                        events: {
+                            onhover: {
+                                enable: true,
+                                mode: 'grab'
+                            },
+                            onclick: {
+                                enable: true,
+                                mode: 'push'
+                            }
+                        },
+                        modes: {
+                            repulse: {
+                                distance: 100,
+                                duration: 0.25
+                            },
+                            grab: {
+                                distance: 155
+                            },
+                            push: {
+                                particles_nb: 4
+                            }
+                        }
+                    },
+                    retina_detect: true,
+                    fps_limit: 60
+                });
+            }
+
+            function loadSavedTheme() {
+                const savedTheme = localStorage.getItem('v0rt3x-theme');
+                if (savedTheme) {
+                    const theme = JSON.parse(savedTheme);
+
+                    // Handle background
+                    if (theme.background === 'none') {
+                        document.body.style.backgroundImage = 'none';
+                        document.body.style.backgroundColor = '#000000';
+                    } else {
+                        document.body.style.backgroundImage = `url('${theme.background}')`;
+                    }
+
+                    // Handle header color
+                    const header = document.querySelector('header');
+                    if (header) {
+                        header.style.backgroundColor = theme.headerColor;
+                    }
+
+                    // Handle particles
+                    const particleContainer = document.getElementById('particles-js');
+                    if (particleContainer) {
+                        if (theme.themeName === "Particle Theme") {
+                            particleContainer.style.display = 'block';
+                            if (window.particlesJS) {
+                                initializeParticles(theme.particleColor || '#4B0082');
+                            }
+                        } else {
+                            particleContainer.style.display = 'none';
+                        }
+                    }
+                }
+            }
+
+            // Add CSS for particles container
+            const style = document.createElement('style');
+            style.textContent = `
+                        #particles-js {
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            z-index: -1;
+                            background-color: #000000;
+                            display: none;
+                        }
+                    `;
+            document.head.appendChild(style);
+
+            // Run on page load
+            document.addEventListener('DOMContentLoaded', loadSavedTheme);
+            // Also run immediately in case DOM is already loaded
+            loadSavedTheme();
+        </script>
+
+    </div>
+    <script>
+        function initMatrix(color) {
+            const canvas = document.getElementById('matrix-canvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()";
+            const charSize = 20;
+            const columns = canvas.width / charSize;
+            const drops = new Array(Math.floor(columns)).fill(1);
+
+            let frameCount = 0;
+
+            function draw() {
+                frameCount++;
+
+                // Only update every 4 frames
+                if (frameCount % 4 === 0) {
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    ctx.fillStyle = color;
+                    ctx.font = `${charSize}px monospace`;
+
+                    for (let i = 0; i < drops.length; i++) {
+                        const text = chars[Math.floor(Math.random() * chars.length)];
+                        ctx.fillText(text, i * charSize, drops[i] * charSize);
+
+                        if (drops[i] * charSize > canvas.height && Math.random() > 0.99) {
+                            drops[i] = 0;
+                        }
+                        drops[i]++;
+                    }
+                }
+
+                canvas.dataset.animationId = requestAnimationFrame(draw);
+            }
+
+            draw();
+        }
+
+        // Keep the window resize handler
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('matrix-canvas');
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        });
+    </script>
+    <!-- Add these elements right after the opening <body> tag -->
+    <div id="particles-js"></div>
+    <canvas id="matrix-canvas" style="position: fixed; top: 0; left: 0; z-index: -1; display: none;"></canvas>
+
+    <!-- Add these scripts right before the closing </body> tag -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+// Function to initialize snow effect
+function initSnowEffect() {
+    const particleContainer = document.getElementById('particles-js');
+    if (!particleContainer) {
+        const container = document.createElement('div');
+        container.id = 'particles-js';
+        document.body.appendChild(container);
     }
-});
 
-document.getElementById('logo-text').addEventListener('click', function () {
-    window.location.href = ('index.html')
-});
+    particleContainer.style.display = 'block';
+    particleContainer.style.backgroundColor = 'transparent';
 
-// Modified gear button click handler to navigate to settings.html
-document.getElementById('gear-button').addEventListener('click', function () {
-    window.location.href = 'setting.html';
-});
-
-// Check if a background image is stored in localStorage when the page loads
-window.addEventListener('load', function () {
-    const storedBackground = localStorage.getItem('backgroundImage');
-    if (storedBackground) {
-        document.body.style.backgroundImage = 'url(' + storedBackground + ')';
-    }
-});
-</script>
-<div class="grid-container" id="gridContainer">
-<!-- Dynamically generate a large number of items with different images and names -->
-<script>
-const gridContainer = document.querySelector('.grid-container');
-const searchBar = document.getElementById('searchBar');
-
-const items = [
-{ name: 'ArtClass', imageUrl: 'https://avatars.githubusercontent.com/u/116205545?s=280&v=4', page: 'a/page1.html' },
-{ name: 'Anura Pro', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Zip_9Sc-Y6BxhrBhZ770znyfGPcIc-48RQ&s', page: 'a/page2.html' },
-{ name: 'Chess', imageUrl: 'https://static.wikia.nocookie.net/logopedia/images/4/4a/Chess.com_2019_%28App_Icon%29.png/revision/latest/scale-to-width-down/250?cb=20221006103032', page: 'a/page3.html' },
-{ name: 'Cool Math Games', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwROf_FVSh9WkFeG15X-kVysnKddaMHvxSEA&s', page: 'a/page4.html' },
-{ name: 'Discord', imageUrl: 'https://static.vecteezy.com/system/resources/previews/006/892/625/non_2x/discord-logo-icon-editorial-free-vector.jpg', page: 'a/page5.html' },
-{ name: 'GeForce', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsx4PQB6dguKRpeM0xEOtaimEhoGejEYJNqQ&s', page: 'a/page6.html' },
-{ name: 'Google', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDIbudNn2WDl1Lc_jAa_B4bwjPyjIJW-fcoQ&s', page: 'a/page7.html' },
-{ name: 'Ninja.ai', imageUrl: 'https://ipfs.io/ipfs/QmP4s7JqWtTYzP4m8xM4CMcxMeqicRoszoZVpuSu7Jad3c', page: 'a/page8.html' },
-{ name: 'Spotify', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmn49U8s0si8AOcPjFxKDmNNaL9HJsgNdulA&s', page: 'a/page9.html' },
-{ name: 'TikTok', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkuJhoBifc904AlWJdNNoIaAwALpBy_yL5tQ&s', page: 'a/page10.html' },
-{ name: 'Poe AI', imageUrl: 'https://www.fahimai.com/wp-content/uploads/2024/06/Untitled-design-11.png', page: 'a/page11.html' }
-
-
-];
-
-function filterGames() {
-const searchTerm = searchBar.value.toLowerCase();
-const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchTerm));
-renderGrid(filteredItems);
+    particlesJS('particles-js', {
+        particles: {
+            number: {
+                value: 100,
+                density: {
+                    enable: true,
+                    value_area: 800
+                }
+            },
+            color: {
+                value: "#ffffff"
+            },
+            shape: {
+                type: "circle",
+            },
+            opacity: {
+                value: 0.7,
+                random: false,
+            },
+            size: {
+                value: 4,
+                random: true,
+                anim: {
+                    enable: true,
+                    speed: 2,
+                    size_min: 1,
+                    sync: false
+                }
+            },
+            line_linked: {
+                enable: false,
+            },
+            move: {
+                enable: true,
+                speed: 2,
+                direction: "bottom",
+                random: true,
+                straight: false,
+                out_mode: "out",
+                bounce: false,
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: "bubble"
+                },
+                onclick: {
+                    enable: true,
+                    mode: "repulse"
+                },
+                resize: true
+            },
+            modes: {
+                bubble: {
+                    distance: 200,
+                    size: 6,
+                    duration: 0.3,
+                    opacity: 1,
+                    speed: 3
+                },
+                repulse: {
+                    distance: 200,
+                    duration: 0.4
+                }
+            }
+        },
+        retina_detect: true
+    });
 }
 
-function renderGrid(filteredItems) {
-gridContainer.innerHTML = '';
-filteredItems.forEach(item => {
-const gridItem = document.createElement('div');
-gridItem.className = 'grid-item';
+// Function to check and load theme
+function loadSavedTheme() {
+    const savedTheme = localStorage.getItem('v0rt3x-theme');
+    if (savedTheme) {
+        const themeSettings = JSON.parse(savedTheme);
 
-const imageSlot = document.createElement('div');
-imageSlot.className = 'image-slot';
+        if (themeSettings.themeName === "Christmas Theme") {
+            if (themeSettings.background === 'none') {
+                document.body.style.backgroundImage = 'none';
+                document.body.style.backgroundColor = '#000000';
+            } else {
+                document.body.style.backgroundImage = `url('${themeSettings.background}')`;
+            }
 
-const img = document.createElement('img');
-img.src = item.imageUrl;
-img.alt = item.name;
-imageSlot.appendChild(img);
+            const header = document.querySelector('header');
+            if (header) {
+                header.style.backgroundColor = themeSettings.headerColor;
+            }
 
-const caption = document.createElement('div');
-caption.className = 'caption';
-caption.textContent = item.name;
-
-gridItem.appendChild(imageSlot);
-gridItem.appendChild(caption);
-
-gridItem.onclick = () => {
-window.open(item.page, '_blank');
-};
-
-gridContainer.appendChild(gridItem);
-});
+            initSnowEffect();
+        }
+    }
 }
 
-renderGrid(items);
+// Add required CSS
+const snowStyles = document.createElement('style');
+snowStyles.textContent = `
+    #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+        background-color: transparent;
+    }
 
-</script>
-</div>
+    header {
+        z-index: 2;
+        position: relative;
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+    }
+`;
+document.head.appendChild(snowStyles);
+
+// Load theme when DOM is ready
+document.addEventListener('DOMContentLoaded', loadSavedTheme);
+    </script>
 </body>
 </html>
